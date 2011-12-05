@@ -28,6 +28,7 @@ public class CookBookDbAdapter {
     public static final String FKEY_RECIPE_ID = "recipeId";
     public static final String FKEY_INGREDIENT_ID = "ingredientId";
     public static final String KEY_QUANTITY = "quantity";
+    public static final String KEY_UNIT = "unit";
 
     // ingredients table fields
     public static final String PKEY_INGREDIENT_ID = "_id";
@@ -50,7 +51,7 @@ public class CookBookDbAdapter {
            	"create table recipeIngredients (" + PKEY_RECIPE_INGREDIENT_ID +
            	" integer primary key autoincrement, " + FKEY_RECIPE_ID +
            	" integer not null, " + FKEY_INGREDIENT_ID + " integer not null, " +
-           	KEY_QUANTITY + " integer);";
+           	KEY_QUANTITY + " integer, " + KEY_UNIT + " string);";
     
     private static final String INGREDIENTS_TABLE_CREATE =
            	"create table ingredients (" + PKEY_INGREDIENT_ID +
@@ -181,12 +182,13 @@ public class CookBookDbAdapter {
 
     // create a new recipeIngredient using values provided in parameters
     public long createRecipeIngredient(Integer recipeId, Integer ingredientId,
-    	Integer quantity) {
+    	Integer quantity, String unit) {
     	
     	ContentValues addValues = new ContentValues();
     	addValues.put(FKEY_RECIPE_ID, recipeId);
     	addValues.put(FKEY_INGREDIENT_ID, ingredientId);
     	addValues.put(KEY_QUANTITY, quantity);
+    	addValues.put(KEY_UNIT, unit);
     	
         return mDb.insert(RECIPE_INGREDIENTS_TABLE, null, addValues);
     }
@@ -196,8 +198,8 @@ public class CookBookDbAdapter {
 
         Cursor mCursor = mDb.query(true, RECIPE_INGREDIENTS_TABLE,
         	new String[] {PKEY_RECIPE_INGREDIENT_ID, FKEY_RECIPE_ID,
-        	FKEY_INGREDIENT_ID, KEY_QUANTITY}, FKEY_RECIPE_ID + "=" + recipeId,
-        	null, null, null, null, null);
+        	FKEY_INGREDIENT_ID, KEY_QUANTITY, KEY_UNIT}, FKEY_RECIPE_ID + "=" +
+        	recipeId, null, null, null, null, null);
 
         if (mCursor != null) {
             mCursor.moveToFirst();

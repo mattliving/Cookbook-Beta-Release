@@ -30,13 +30,13 @@ public class ExampleDbActivity extends Activity {
     }
 
     private void createRecipeIngredients() {
-    	mDbHelper.createRecipeIngredient(1, 1, 6);
-    	mDbHelper.createRecipeIngredient(1, 2, 150);
-    	mDbHelper.createRecipeIngredient(1, 3, 300);
-    	mDbHelper.createRecipeIngredient(2, 1, 200);
-    	mDbHelper.createRecipeIngredient(2, 1, 200);
-    	mDbHelper.createRecipeIngredient(3, 1, 30);
-    	mDbHelper.createRecipeIngredient(3, 2, 3);
+    	mDbHelper.createRecipeIngredient(1, 1, 6, "Qty");
+    	mDbHelper.createRecipeIngredient(1, 2, 150, "g");
+    	mDbHelper.createRecipeIngredient(1, 3, 300, "g");
+    	mDbHelper.createRecipeIngredient(2, 1, 200, "g");
+    	mDbHelper.createRecipeIngredient(2, 1, 200, "g");
+    	mDbHelper.createRecipeIngredient(3, 1, 30, "g");
+    	mDbHelper.createRecipeIngredient(3, 2, 3, "g");
     }
 
     private void createIngredient() {
