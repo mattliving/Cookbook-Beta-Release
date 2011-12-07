@@ -19,6 +19,8 @@ import android.content.Context;
 
 /**
  * Parse a file from an input stream and generates a list of recipes.
+ * Useful as an example on how to read files on android.
+ * All the files should be in /res/raw/
  * @author Giulio
  *
  */
@@ -50,9 +52,9 @@ public class readFile  {
 		String mIngredients = "";
 		String mPreparation = "";
 		int identifier =0;
-		TypeOfMeal type= Recipe.TypeOfMeal.MAIN ;
+		String type= "Main" ;
 		int cookingTime =0;
-		Season season = Recipe.Season.NULL;
+		String season = " ";
 		String mRegion = "";
 		float mRating =0;
 		
@@ -89,7 +91,7 @@ public class readFile  {
 						}
 						case 4:
 						{
-							 type = Recipe.TypeOfMeal.MAIN;// FAKE! NOT WORKING PRPERLY
+							 type = new String(line);
 							 step++;
 							 break;
 						}
@@ -101,7 +103,7 @@ public class readFile  {
 						}
 						case 6:
 						{
-							 season = Recipe.Season.SPRING;// FAKE! NOT WORKING PRPERLY
+							 season = new String(line);
 							 step++;
 							 break;
 						}

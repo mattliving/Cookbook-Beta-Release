@@ -7,6 +7,13 @@ package com.cookbook.core;
 
 import java.util.Vector;
 
+import android.database.Cursor;
+import android.util.Log;
+
+import com.cookbook.CookBookDbAdapter;
+import com.cookbook.core.Recipe.Season;
+import com.cookbook.core.Recipe.TypeOfMeal;
+
 
 /** 
  * Class representing a list of Recipes classes
@@ -78,6 +85,44 @@ public class RecipeList {
 		return list.size();
 	}
 	
+	/**
+	 * Build a list with the whole database. to be used only in ALPHA-BETA
+	 * @param adpt the cookbook adapter
+	 */
+	public void fetchAllRecipes(CookBookDbAdapter adpt){
+		
+		Cursor cursor = adpt.fetchAllRecipes();
+		
+		/**
+		 * WHY 84 ROWS if the recipes insterted are 3?
+		 */
+		Log.d("MyDebug", String.valueOf(cursor.getCount()));
+		
+		cursor.moveToFirst();
+		while(!cursor.isAfterLast())
+		{
+			int identifier = cursor.getInt(0);
+			String mName = cursor.getString(1);
+			String mPreparation = cursor.getString(2);
+			String type= cursor.getString(3);
+			int cookingTime = cursor.getInt(4);
+			String season = cursor.getString(5);
+			String mRegion = cursor.getString(6);
+			/*
+			 * Commented untile these fields will be part of the database
+			 */
+			//String mIngredients = cursor.getString(7);
+			//float mRating = cursor.getFloat(8);
+			/*
+			 *  NOT FINAL 
+			 */
+			addRecipe(new Recipe(mName," ",mPreparation,identifier,
+					type,cookingTime,season,mRegion,1f));
+		cursor.moveToNext();
+		}
+	
+		
+	}
 	
 	
 }

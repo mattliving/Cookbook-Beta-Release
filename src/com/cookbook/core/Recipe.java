@@ -18,9 +18,9 @@ public class Recipe {
 	protected String mIngredients;
 	protected String mPreparation;
 	protected int identifier;
-	protected TypeOfMeal type;
+	protected String type;
 	protected int cookingTime;
-	protected Season season;
+	protected String season;
 	protected String mRegion;
 	protected float mRating;
 		
@@ -38,7 +38,7 @@ public class Recipe {
 	 * @param mRating
 	 */
 	public Recipe(String mName,String mIngredients,String mPreparation,int identifier,
-			 TypeOfMeal type, int cookingTime, Season season,String mRegion,float mRating){
+			 String type, int cookingTime, String season,String mRegion,float mRating){
 	
 	this.mName = new String(mName);
 	this.mIngredients = new String(mIngredients); 
@@ -71,7 +71,7 @@ public class Recipe {
 		return this.identifier;
 	}
 	
-	public TypeOfMeal getType(){
+	public String getType(){
 		return this.type;
 	}
 	
@@ -79,7 +79,7 @@ public class Recipe {
 		return this.cookingTime;
 	}
 	
-	public Season getSeason(){
+	public String getSeason(){
 		return this.season;
 	}
 	
