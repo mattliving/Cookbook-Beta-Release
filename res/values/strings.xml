@@ -1,7 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">Hello World, CookbookActivity!</string>
-    <string name="app_name">Cookbook</string>
+    <string name="hello">Hello World, CookBookApplicationActivity!</string>
+    <string name="app_name">CookBookApplication</string>
+    <string name="Ingredient">Ingredient</string>
+    <string name="Amount">Amount (weight, volume etc.)</string>
+    <string-array name="WeightMeasurement">
+        <item >Gram(s) (g)</item>
+        <item >Kilogram(s) (kg)</item>
+        <item>Ounce(s) (oz)</item><item>Pound(s) (lb)</item><item>Millilitre(s) (ml)</item>
+        
+        <item>Litre(s) (l)</item><item>Pint(s)</item><item>Gallon(s)</item><item >Teaspoon(s)</item>
+        <item >Tablespoon(s)</item>
+        <item >Cup(s)</item>
+        
+        
+        <item >Pinch</item>
+        
+        
+        <item >Unit(s) (clove/lemon etc..)</item>
+    </string-array>
+    <string name="Measurement">Measurement</string>
+    <string name="NoMoreIngredients">No more Ingredients</string>
+    <string name="AddIngredient">Add Ingredient</string>
+    <string name="SubmitIngredients">Submit</string>
+    <string name="Edit">Edit</string>
+    <string name="Method">Method</string>
+    <string name="NameOfRecipe">Name of Recipe</string>
+    <string-array name="TypeOfRecipe">
+        <item >Breakfast</item><item>Lunch/Snack</item>
+        <item >Starters</item>
+        <item >Main Course</item>
+        <item >Pudding</item>
+        
+    </string-array>
+        <string name="Seasonal">Seasonal preference (optional)</string>
+        <string name="Upload">Upload</string>
+        <string name="Remove">Remove</string>
 
 </resources>

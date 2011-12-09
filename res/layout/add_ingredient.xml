@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/AddIngredientsTab" >
+
+    <TableLayout
+        android:id="@+id/IngredientsTable"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="right"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <TableRow
+            android:id="@+id/Ingredients1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false" >
+
+            <EditText
+                android:id="@+id/IngredientBox0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/Ingredient"
+                android:inputType="text" >
+
+                <requestFocus />
+            </EditText>
+
+            <Button
+                android:id="@+id/EditButton0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/Edit"
+                android:visibility="invisible" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/Amount1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false" >
+
+            <EditText
+                android:id="@+id/AmountBox0"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/Amount"
+                android:inputType="number"
+                android:visibility="visible" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/Measurement1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false" >
+
+            <Spinner
+                android:id="@+id/WeightMeasurement0"
+                style="@android:style/Widget.Spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/WeightMeasurement"
+                android:prompt="@string/Measurement" />
+
+        </TableRow>
+
+    </TableLayout>
+
+    <Button
+        android:id="@+id/AddIngredients"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="@string/AddIngredient" />
+
+</LinearLayout>
