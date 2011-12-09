@@ -22,6 +22,12 @@ public class CookBookDbAdapter {
     public static final String KEY_DURATION = "duration";
     public static final String KEY_TIME_OF_YEAR = "timeOfYear";
     public static final String KEY_REGION = "region";
+    /**
+     * WE NEED 3 Other fields:
+     * INGREDIENTS: a string
+     * RATING: a float
+     * RATING_NUMBER: a int
+     */
 	
     // recipeIngredients table fields
     public static final String PKEY_RECIPE_INGREDIENT_ID = "_id";

@@ -4,9 +4,15 @@ import android.app.Activity;
 import android.os.Bundle;
 
 public class ExampleDbActivity extends Activity {
-	private CookBookDbAdapter mDbHelper;
 	
-    /** Called when the activity is first created. */
+	/**
+	 * Database Adapter
+	 */
+	private CookBookDbAdapter mDbHelper; 
+	
+    /**
+     *  Called when the activity is first created. 
+     *  */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +25,7 @@ public class ExampleDbActivity extends Activity {
     }
     
     private void createRecipe() {
-    	mDbHelper.createRecipe("Spaghetti Bolgnaise", "1. Step1\n2. Step2\n" +
+    	mDbHelper.createRecipe("Spaghetti Bolgnese", "1. Step1\n2. Step2\n" +
     		"3. Step3\n4. Step4", "Dinner", 30, "", "Italy");
     	mDbHelper.createRecipe("Mousaka", "1. StepA\n2. StepB\n" +
         		"3. StepC\n4. StepD", "Lunch", 30, "", "Greek");

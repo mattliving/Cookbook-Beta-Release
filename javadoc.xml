@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="public" author="true" classpath="." destdir="doc" doctitle="Cookbook Reference" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="com.cookbook.core" source="1.6" sourcefiles="src/com/cookbook/CookbookActivity.java,src/com/cookbook/ImageAdapter.java" sourcepath="gen;src" splitindex="true" use="true" version="true">
+            <link href="file:/C:/Program Files (x86)/Android/android-sdk/docs/reference"/>
+        </javadoc>
+    </target>
+</project>
