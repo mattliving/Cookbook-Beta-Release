@@ -2,7 +2,7 @@
 <resources>
 
     <string name="hello">Hello World, CookBookApplicationActivity!</string>
-    <string name="app_name">CookBookApplication</string>
+    <string name="app_name">CookBook</string>
     <string name="Ingredient">Ingredient</string>
     <string name="Amount">Amount (weight, volume etc.)</string>
     <string-array name="WeightMeasurement">

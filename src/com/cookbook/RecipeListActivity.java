@@ -35,9 +35,9 @@ public class RecipeListActivity extends ListActivity {
         //Initialise the DB
         mDbHelper = new CookBookDbAdapter(this);
         mDbHelper.open();
-        createRecipe();
-        createIngredient();
-        createRecipeIngredients();
+        //createRecipe();
+        //createIngredient();
+        //createRecipeIngredients();
         
         
         /*
