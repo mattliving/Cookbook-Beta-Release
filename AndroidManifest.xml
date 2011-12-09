@@ -24,6 +24,14 @@
         </activity>
         <activity
             android:label="@string/app_name"
+            android:name=".BookmarkActivity" >
+        </activity>
+        <activity
+            android:label="@string/app_name"
+            android:name=".MyRecipesActivity" >
+        </activity>
+        <activity
+            android:label="@string/app_name"
             android:name=".AddIngredientActivity" >
         </activity>
     </application>

@@ -10,6 +10,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Vector;
 
 import com.cookbook.core.Recipe.Season;
 import com.cookbook.core.Recipe.TypeOfMeal;
@@ -39,7 +40,7 @@ public class readFile  {
 	 * @param fos the InputStream
 	 * @return the RecipeList reference
 	 */
-	public RecipeList read(InputStream fos){
+	public RecipeList readRecipeData(InputStream fos){
 		
 		this.fos = fos;
 		this.list = new RecipeList();
@@ -140,4 +141,42 @@ public class readFile  {
 	return this.list;
 	
 	}
+	
+	
+	/**
+	 * Read Ids from an inpuStream and return a Vector of them
+	 * @param fos
+	 * @return
+	 */
+	public Vector<Long> readIDs(InputStream fos){
+	
+	this.fos = fos;
+	this.list = new RecipeList();
+	InputStreamReader input = new InputStreamReader(fos);
+	BufferedReader buffreader = new BufferedReader(input);
+	String line;
+	Vector<Long> ids = new Vector<Long>();
+	
+	try {
+		while ((line = buffreader.readLine()) != null)
+		{
+			long i;
+			try {
+				i = Long.valueOf(line);
+			} catch (NumberFormatException e) {
+				return ids;
+			}
+			ids.add(i);
+		}
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		return ids;
+	}
+	
+	return ids;
+	
+	}
+	
+	
+	
 }

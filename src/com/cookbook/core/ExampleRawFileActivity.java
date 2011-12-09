@@ -48,7 +48,7 @@ public class ExampleRawFileActivity extends ListActivity {
 	   */
 		fos = myResources.openRawResource(R.raw.recipes);
 		rd = new readFile();
-	  list = rd.read(fos);
+	  list = rd.readRecipeData(fos);
 
 
 	  /**

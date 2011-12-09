@@ -8,6 +8,7 @@ package com.cookbook.core;
 import java.util.Vector;
 
 import android.database.Cursor;
+import android.database.SQLException;
 import android.util.Log;
 
 import com.cookbook.CookBookDbAdapter;
@@ -85,6 +86,35 @@ public class RecipeList {
 		return list.size();
 	}
 	
+	
+	/**
+	 * Parse one cursor row into a Recipe and add it to the list
+	 * @param cursor
+	 */
+	public void addRecipe(Cursor cursor){
+		
+		int identifier = cursor.getInt(0);
+		String mName = cursor.getString(1);
+		String mPreparation = cursor.getString(2);
+		String type= cursor.getString(3);
+		int cookingTime = cursor.getInt(4);
+		String season = cursor.getString(5);
+		String mRegion = cursor.getString(6);
+		/*
+		 * Commented untile these fields will be part of the database
+		 */
+		//String mIngredients = cursor.getString(7);
+		//float mRating = cursor.getFloat(8);
+		/*
+		 *  NOT FINAL 
+		 */
+		addRecipe(new Recipe(mName," ",mPreparation,identifier,
+				type,cookingTime,season,mRegion,1f));
+		
+	}
+	
+	
+	
 	/**
 	 * Build a list with the whole database. to be used only in ALPHA-BETA
 	 * @param adpt the cookbook adapter
@@ -101,28 +131,35 @@ public class RecipeList {
 		cursor.moveToFirst();
 		while(!cursor.isAfterLast())
 		{
-			int identifier = cursor.getInt(0);
-			String mName = cursor.getString(1);
-			String mPreparation = cursor.getString(2);
-			String type= cursor.getString(3);
-			int cookingTime = cursor.getInt(4);
-			String season = cursor.getString(5);
-			String mRegion = cursor.getString(6);
-			/*
-			 * Commented untile these fields will be part of the database
-			 */
-			//String mIngredients = cursor.getString(7);
-			//float mRating = cursor.getFloat(8);
-			/*
-			 *  NOT FINAL 
-			 */
-			addRecipe(new Recipe(mName," ",mPreparation,identifier,
-					type,cookingTime,season,mRegion,1f));
+			addRecipe(cursor);
+			
 		cursor.moveToNext();
 		}
 	
 		
 	}
 	
+	/**
+	 * Add Recipes to the list from a list of database IDs
+	 * @param ids
+	 * @param adpt
+	 */
+	
+	public void fetchFromIDs(Vector<Long> ids, CookBookDbAdapter adpt){
+		
+	if (ids.size() ==0) return;	
+		for (int i=0;i<ids.size();i++){
+			
+			Cursor cur = null;
+			try {
+				cur = adpt.fetchRecipe(ids.get(i));
+			} catch (SQLException e) {
+				
+			}
+			if (cur !=null) addRecipe(cur);
+			
+		}
+		
+	}
 	
 }

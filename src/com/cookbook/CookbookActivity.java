@@ -23,13 +23,13 @@ public class CookbookActivity  extends TabActivity{
 
 	        tabHost.addTab(tabHost.newTabSpec("Bookmarks")
 	                .setIndicator("Bookmarks")
-	                .setContent(new Intent(this, RecipeListActivity.class)));
+	                .setContent(new Intent(this, BookmarkActivity.class)));
 	        
 	        // This tab sets the intent flag so that it is recreated each time
 	        // the tab is clicked.
 	        tabHost.addTab(tabHost.newTabSpec("tab3")
-	                .setIndicator("destroy")
-	                .setContent(new Intent(this, RecipeListActivity.class)
+	                .setIndicator("MyRecipes")
+	                .setContent(new Intent(this, MyRecipesActivity.class)
 	                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)));
 	    }
 }
