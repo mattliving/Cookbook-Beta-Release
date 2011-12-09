@@ -23,10 +23,11 @@ public class CookBookDbAdapter {
     public static final String KEY_TIME_OF_YEAR = "timeOfYear";
     public static final String KEY_REGION = "region";
     /**
+     * [comments from Giulio]
      * WE NEED 3 Other fields:
-     * INGREDIENTS: a string
-     * RATING: a float
-     * RATING_NUMBER: a int
+     * INGREDIENTS: a string [craig]we don't, i'll explain why
+     * RATING: a float [craig]I'll add this for beta release  
+     * RATING_NUMBER: a int [craig]I'll add this for beta release
      */
 	
     // recipeIngredients table fields
@@ -228,6 +229,20 @@ public class CookBookDbAdapter {
         Cursor mCursor = mDb.query(true, INGREDIENTS_TABLE,
         	new String[] {PKEY_INGREDIENT_ID, KEY_INGREDIENT},
         	PKEY_INGREDIENT_ID + "=" + ingredientId,
+        	null, null, null, null, null);
+
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+        }
+        return mCursor;
+    }
+    
+    // return cursor at ingredient with given ingredient name 
+    public Cursor fetchIngredient(String ingredientName) throws SQLException {
+
+        Cursor mCursor = mDb.query(true, INGREDIENTS_TABLE,
+        	new String[] {PKEY_INGREDIENT_ID, KEY_INGREDIENT},
+        	KEY_INGREDIENT + "=" + ingredientName,
         	null, null, null, null, null);
 
         if (mCursor != null) {
