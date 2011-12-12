@@ -1,33 +1,33 @@
 package com.cookbook;
 
-import com.cookbook.core.RecipeList;
+import java.io.InputStream;
 
-import android.app.Activity;
+import com.cookbook.core.RecipeList;
+import com.cookbook.core.readFile;
+
 import android.app.ListActivity;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
-//Trying commit and removing cookbook folder
+public class UserRecipesActivity extends ListActivity {
 
-public class RecipeListActivity extends ListActivity {
-    
-	/**
-	 * Database Adapter
-	 */
-	protected CookBookDbAdapter mDbHelper;
+	
+	Resources myResources;
+	readFile rd;
+	CookBookDbAdapter mDbHelper;
 	
 	/** List of Recipes */
 	protected RecipeList list = new RecipeList();
 
-	/** Called when the activity is first created. */
-    @Override
+	
+	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.main);
@@ -39,26 +39,33 @@ public class RecipeListActivity extends ListActivity {
         //createIngredient();
         //createRecipeIngredients();
         
-        
+        myResources = getResources();
         /*
          * Add the database entries to the list
          */
-        list.fetchAllRecipes(mDbHelper);
+        InputStream fos = myResources.openRawResource(R.raw.userrecipes);
+        rd = new readFile();
+        list.fetchFromIDs(rd.readIDs(fos),mDbHelper);
         
-        /**
-         * Debugging messages in android!
-         */
-        Log.d("MyDebug", String.valueOf(list.size()));
+       
         
         /**
   	   * adding the list to the recipeArray used to display it
   	   */
+        
+      if (list.size()>0)
+      {  
   	  RECIPES = new String[list.size()];
   	  for (int i =0; i<list.size();i++){
   		  RECIPES[i] = list.getRecipe(i).getName()+"\nType: "+list.getRecipe(i).getType();
   		  System.out.println(list.getRecipe(i).getName());
   	  }
-        
+      }
+      else
+      {
+    	  RECIPES = new String[1];
+    	  RECIPES[0] = "No Recipes added yet";
+      }
         
      // list_item is in /res/layout/ should be created
   	  setListAdapter(new ArrayAdapter<String>(this, R.layout.list_item, RECIPES));
@@ -85,42 +92,7 @@ public class RecipeListActivity extends ListActivity {
 	      }
         });
     }
-    
-    
-    private void createRecipe() {
-    	mDbHelper.createRecipe("Spaghetti Bolgnaise", "1. Step1\n2. Step2\n" +
-    		"3. Step3\n4. Step4", "Dinner", 30, "", "Italy");
-    	mDbHelper.createRecipe("Mousaka", "1. StepA\n2. StepB\n" +
-        		"3. StepC\n4. StepD", "Lunch", 30, "", "Greek");
-    	mDbHelper.createRecipe("Cheese on Toast", "1. Pre-heat grill\n2. Slice"
-        		+ "cheese\n3. Cook one side of the toast\n4. Turn toast over\n" 
-    			+ "5. Put cheese on uncooked side of toast\n6. Cook until" +
-    			" cheese" +	"is bubbling", "Snack", 10, "", "");
-    }
-
-    private void createRecipeIngredients() {
-    	mDbHelper.createRecipeIngredient(1, 1, 6, "Qty");
-    	mDbHelper.createRecipeIngredient(1, 2, 150, "g");
-    	mDbHelper.createRecipeIngredient(1, 3, 300, "g");
-    	mDbHelper.createRecipeIngredient(2, 1, 200, "g");
-    	mDbHelper.createRecipeIngredient(2, 1, 200, "g");
-    	mDbHelper.createRecipeIngredient(3, 1, 30, "g");
-    	mDbHelper.createRecipeIngredient(3, 2, 3, "g");
-    }
-
-    private void createIngredient() {
-    	mDbHelper.createIngredient("Tomatoes");
-    	mDbHelper.createIngredient("Pasta");
-    	mDbHelper.createIngredient("Beef");
-    	mDbHelper.createIngredient("Lamb");
-    	mDbHelper.createIngredient("Cheese");
-    	mDbHelper.createIngredient("Bread");
-    }
-    
-    
-    /** need it*/
+	
+	/** need it*/
 	 String[] RECIPES = new String[]{"lol"};
-
-    
-    
 }

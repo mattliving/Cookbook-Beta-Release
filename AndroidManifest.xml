@@ -24,7 +24,11 @@
         </activity>
         <activity
             android:label="@string/app_name"
-            android:name=".BookmarkActivity" >
+            android:name=".BookmarksActivity" >
+        </activity>
+         <activity
+            android:label="@string/app_name"
+            android:name=".UserRecipesActivity" >
         </activity>
         <activity
             android:label="@string/app_name"
