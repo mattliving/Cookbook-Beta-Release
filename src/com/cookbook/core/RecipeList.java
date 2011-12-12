@@ -123,6 +123,7 @@ public class RecipeList {
 		
 		Cursor cursor = adpt.fetchAllRecipes();
 		
+		if (cursor == null) return;
 		/**
 		 * WHY 84 ROWS if the recipes insterted are 3?
 		 */
@@ -161,5 +162,33 @@ public class RecipeList {
 		}
 		
 	}
+	
+	
+	/**
+	 * Build a list of recipe with a specific name to be used only in ALPHA-BETA
+	 * @param adpt the cookbook adapter
+	 */
+	public void fetchByName(CookBookDbAdapter adpt,String name){
+		
+		Cursor cursor = adpt.fetchRecipe(name);
+		if (cursor ==null) return;
+		list.clear();
+		
+		/**
+		 * WHY 84 ROWS if the recipes insterted are 3?
+		 */
+		Log.d("MyDebug", String.valueOf(cursor.getCount()));
+		
+		cursor.moveToFirst();
+		while(!cursor.isAfterLast())
+		{
+			addRecipe(cursor);
+			
+		cursor.moveToNext();
+		}
+	
+		
+	}
+	
 	
 }

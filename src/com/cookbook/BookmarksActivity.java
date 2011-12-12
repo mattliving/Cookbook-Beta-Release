@@ -25,7 +25,8 @@ public class BookmarksActivity extends ListActivity {
 	
 	/** List of Recipes */
 	protected RecipeList list = new RecipeList();
-
+	/** Array Adapter, needed to update the listview */
+	protected ArrayAdapter<String> arrayadp;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,7 +69,8 @@ public class BookmarksActivity extends ListActivity {
       }
         
      // list_item is in /res/layout/ should be created
-  	  setListAdapter(new ArrayAdapter<String>(this, R.layout.list_item, RECIPES));
+      arrayadp = new ArrayAdapter<String>(this, R.layout.list_item, RECIPES);
+  	  setListAdapter(arrayadp);
 
 
 

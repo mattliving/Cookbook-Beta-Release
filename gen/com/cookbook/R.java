@@ -48,8 +48,11 @@ public final class R {
         public static final int Season=0x7f08000f;
         public static final int UploadButton=0x7f080010;
         public static final int WeightMeasurement0=0x7f080008;
+        public static final int autoCompleteTextView1=0x7f080018;
+        public static final int buttonsearch=0x7f080017;
         public static final int gridview=0x7f08000a;
         public static final int linearLayout1=0x7f080013;
+        public static final int listView1=0x7f080019;
         public static final int scrollView1=0x7f080012;
         public static final int tab1=0x7f08000c;
         public static final int tab2=0x7f080011;
@@ -62,6 +65,7 @@ public final class R {
         public static final int main=0x7f030002;
         public static final int my_recipes=0x7f030003;
         public static final int recipe_page=0x7f030004;
+        public static final int search=0x7f030005;
     }
     public static final class raw {
         public static final int bookmarks=0x7f040000;

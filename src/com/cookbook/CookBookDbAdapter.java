@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /* Provides following functionality:
@@ -160,10 +161,16 @@ public class CookBookDbAdapter {
     // return cursor at recipe with given recipeName 
     public Cursor fetchRecipe(String recipeName) throws SQLException {
 
-        Cursor mCursor = mDb.query(false, RECIPE_TABLE,
-        	new String[] {PKEY_RECIPE_ID, KEY_RECIPE_NAME, KEY_METHOD,
-        	KEY_MEAL_TYPE, KEY_DURATION, KEY_TIME_OF_YEAR, KEY_REGION},
-        	KEY_RECIPE_NAME + "=" + recipeName, null, null, null, null, null);
+        Cursor mCursor;
+		try {
+			mCursor = mDb.query(false, RECIPE_TABLE,
+				new String[] {PKEY_RECIPE_ID, KEY_RECIPE_NAME, KEY_METHOD,
+				KEY_MEAL_TYPE, KEY_DURATION, KEY_TIME_OF_YEAR, KEY_REGION},
+				KEY_RECIPE_NAME + "=" + "'"+recipeName+"'", null, null, null, null, null);
+		} catch (SQLiteException e) {
+			// TODO Auto-generated catch block
+			mCursor = null;
+		}
 
         if (mCursor != null) {
             mCursor.moveToFirst();

@@ -25,6 +25,9 @@ public class RecipeListActivity extends ListActivity {
 	
 	/** List of Recipes */
 	protected RecipeList list = new RecipeList();
+	
+	/** ListView */
+	protected  ListView lv;
 
 	/** Called when the activity is first created. */
     @Override
@@ -65,7 +68,7 @@ public class RecipeListActivity extends ListActivity {
 
 
 
-  	  final ListView lv = getListView();
+  	  lv = getListView();
   	  lv.setTextFilterEnabled(true);
 
         
@@ -115,6 +118,11 @@ public class RecipeListActivity extends ListActivity {
     	mDbHelper.createIngredient("Lamb");
     	mDbHelper.createIngredient("Cheese");
     	mDbHelper.createIngredient("Bread");
+    }
+    
+    public void setListView(ListView lb){
+    	this.lv = lb;
+    	lv.setTextFilterEnabled(true);
     }
     
     
