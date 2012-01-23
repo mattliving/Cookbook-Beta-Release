@@ -7,207 +7,124 @@
     <TabWidget
     	android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
-    	android:id="@android:id/tabs" />
+    	android:id="@android:id/tabs" />   
     
     <FrameLayout
         android:id="@android:id/tabcontent"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
-
-<!-- ///////////////////////////////////////////////// -->
-<!-- //////////////////TAB 1////////////////////////// -->
-<!-- ///////////////////////////////////////////////// -->
-
-    <LinearLayout
-        android:id="@+id/tab1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingTop="70dp" >
-
-        <EditText
-            android:id="@+id/NameOfRecipe"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/NameOfRecipe" />
-
-        <Spinner
-            android:id="@+id/RecipeType"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:entries="@array/TypeOfRecipe" />
-
-        <EditText
-            android:id="@+id/Season"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/Seasonal" />
-
-        <Button
-            android:id="@+id/UploadButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="listenerOfUploadButton"
-            android:text="@string/Upload" />
-
-    </LinearLayout>
-     
-<!-- ///////////////////////////////////////////////// -->
-<!-- //////////////////TAB 2////////////////////////// -->
-<!-- ///////////////////////////////////////////////// -->
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    	android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-    	android:orientation="vertical"
-    	android:paddingTop="70dp"
-    	android:id="@+id/tab2" >
-
-    <ScrollView
-        android:id="@+id/scrollView1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" >
+        android:layout_height="fill_parent" >    
+        
+<!-- /////////////////TAB 1////////////////// -->
 
         <LinearLayout
-            android:id="@+id/linearLayout1"
+            android:id="@+id/tab1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <TableLayout
-                android:id="@+id/IngredientsTable"
+            android:orientation="vertical"
+            android:paddingTop="70dp" >
+            <LinearLayout
+                android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="vertical" >
+                android:layout_height="wrap_content" >
 
-                <TableRow
-                    android:id="@+id/Ingredients1"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:baselineAligned="false" >
-
-                    <EditText
-                        android:id="@+id/IngredientBox0"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/Ingredient"
-                        android:inputType="text" />
-
-                    <Button
-                        android:id="@+id/EditButton0"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/Edit"
-                        android:visibility="invisible" />
-
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/Amount1"
+                <EditText
+                    android:id="@+id/editText1"
                     android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2" />
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:baselineAligned="false" >
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/searchicon" />
+            </LinearLayout>
 
-                    <EditText
-                        android:id="@+id/AmountBox0"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/Amount"
-                        android:inputType="number"
-                        android:visibility="visible" />
-
-                    <Button
-                        android:id="@+id/RemoveButton0"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Remove"
-                        android:visibility="invisible" />
-
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/Measurement1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:baselineAligned="false" >
-
-                    <Spinner
-                        android:id="@+id/WeightMeasurement0"
-                        style="@android:style/Widget.Spinner"
+                <ListView
+                        android:id="@+id/listView1"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:entries="@array/WeightMeasurement"
-                        android:prompt="@string/Measurement" />
-                </TableRow>
-            </TableLayout>
+                        android:layout_height="wrap_content" >
 
-            <Button
-                android:id="@+id/AddIngredients"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/AddIngredient" />
+                        <requestFocus />
+                    </ListView>
 
         </LinearLayout>
-
-    </ScrollView>
-
-	</LinearLayout>
-
         
-<!-- ///////////////////////////////////////////////// -->
-<!-- //////////////////TAB 3////////////////////////// -->
-<!-- ///////////////////////////////////////////////// -->
-    <LinearLayout
-    	android:layout_width="fill_parent"
-    	android:layout_height="fill_parent"
-    	android:id="@+id/tab3"
-    	android:orientation="vertical"
-    	android:paddingTop="70dp" >
+<!-- /////////////////TAB 2////////////////// -->
 
-        <EditText
-            android:id="@+id/MethodBox"
+
+         <LinearLayout
+            android:id="@+id/tab2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="top"
-            android:hint="@string/Method"
-            android:inputType="textMultiLine" >
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="70dp" >
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
 
-            <requestFocus />
-        </EditText>
-   
-    </LinearLayout>
-    
-</FrameLayout>
+                <EditText
+                    android:id="@+id/editText2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2" />
+
+                <Button
+                    android:id="@+id/button3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/searchicon" />
+            </LinearLayout>
+
+                <ListView
+                        android:id="@+id/listView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+                        <requestFocus />
+                    </ListView>
+
+        </LinearLayout>
+            
+<!-- /////////////////TAB 3////////////////// -->
+
+        <LinearLayout
+            android:id="@+id/tab3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="70dp" >
+		<LinearLayout
+		    android:id="@+id/linearlayout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+            <TextView
+                android:id="@+id/text1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Sort: "
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"                
+                />   
+            <Spinner
+                android:id="@+id/spinner1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:prompt="@string/categories_prompt" />
+        </LinearLayout>
+            
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Confirm" />
+
+        </LinearLayout>
+        
+	</FrameLayout>
+
 </TabHost>
-
-
-
-
-<!--LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical" >
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="addIngredient"
-        android:text="@string/AddIngredient" />
-
-    <CheckBox
-        android:id="@+id/NoMoreIngredients"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/NoMoreIngredients" />
-
-    <Button
-        android:id="@+id/SubmitIngredients"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/SubmitIngredients" />
-
-</LinearLayout-->

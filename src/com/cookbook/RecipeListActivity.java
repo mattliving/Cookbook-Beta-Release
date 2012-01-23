@@ -1,9 +1,10 @@
 package com.cookbook;
 
-import com.cookbook.core.RecipeList;
+import com.cookbook.RecipeList;
 
 import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,7 +22,7 @@ public class RecipeListActivity extends ListActivity {
 	/**
 	 * Database Adapter
 	 */
-	protected CookBookDbAdapter mDbHelper;
+	protected CookbookDBAdapter mDbHelper;
 	
 	/** List of Recipes */
 	protected RecipeList list = new RecipeList();
@@ -36,7 +37,7 @@ public class RecipeListActivity extends ListActivity {
         //setContentView(R.layout.main);
         
         //Initialise the DB
-        mDbHelper = new CookBookDbAdapter(this);
+        mDbHelper = new CookbookDBAdapter(this);
         mDbHelper.open();
         //createRecipe();
         //createIngredient();
@@ -81,10 +82,17 @@ public class RecipeListActivity extends ListActivity {
 	    public void onItemClick(AdapterView<?> parent, View view,
 	        int position, long id) {
 	      // When clicked, show a toast with the TextView text
-	      Toast.makeText(getApplicationContext(), 
+	     /* Toast.makeText(getApplicationContext(), 
 	    "Ingredients: "+list.getRecipe(position).getIngredients()+"\nPreparation: "+list.getRecipe(position).getPreparation()
 	    +"\nType: "+list.getRecipe(position).getType()+"\nRegion: "+list.getRecipe(position).getRegion(),
 	          Toast.LENGTH_SHORT).show();
+	          */
+	    	//Toast.makeText(getApplicationContext(),"clicked",Toast.LENGTH_SHORT).show();
+	    	Intent recIntent = new Intent(view.getContext(),ViewRecipeActivity.class);
+	    	// trying to send the recipe name to the new activity
+	    	recIntent.putExtra("recipeName",list.getRecipe(position).getName());
+	    	startActivity(recIntent);
+	    	
 	      }
         });
     }

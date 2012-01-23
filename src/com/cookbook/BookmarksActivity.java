@@ -2,8 +2,8 @@ package com.cookbook;
 
 import java.io.InputStream;
 
-import com.cookbook.core.RecipeList;
-import com.cookbook.core.readFile;
+import com.cookbook.RecipeList;
+import com.cookbook.readFile;
 
 import android.app.ListActivity;
 import android.content.res.Resources;
@@ -21,7 +21,7 @@ public class BookmarksActivity extends ListActivity {
 	
 	Resources myResources;
 	readFile rd;
-	CookBookDbAdapter mDbHelper;
+	CookbookDBAdapter mDbHelper;
 	
 	/** List of Recipes */
 	protected RecipeList list = new RecipeList();
@@ -34,7 +34,7 @@ public class BookmarksActivity extends ListActivity {
         //setContentView(R.layout.main);
         
         //Initialise the DB
-        mDbHelper = new CookBookDbAdapter(this);
+        mDbHelper = new CookbookDBAdapter(this);
         mDbHelper.open();
         //createRecipe();
         //createIngredient();

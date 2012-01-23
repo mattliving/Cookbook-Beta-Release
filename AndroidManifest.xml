@@ -11,37 +11,23 @@
         android:label="@string/app_name" >
         <activity
             android:label="@string/app_name"
-            android:name=".SearchActivity" >
+            android:name=".CookbookActivity" >
             <intent-filter >
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:label="@string/app_name"
-            android:name=".RecipeListActivity" >
-        </activity>
-        <activity
-            android:label="@string/app_name"
-            android:name=".BookmarksActivity" >
-        </activity>
-         <activity
-            android:label="@string/app_name"
-            android:name=".UserRecipesActivity" >
-        </activity>
-        <activity
-            android:label="@string/app_name"
-            android:name=".MyRecipesActivity" >
-        </activity>
-        <activity
-            android:label="@string/app_name"
-            android:name=".AddIngredientActivity" >
-        </activity>
-        <activity
-            android:label="@string/app_name"
-            android:name=".CookbookActivity" >
-        </activity>
-    </application> 
+        <activity android:name=".AddRecipeActivity"></activity>
+        <activity android:name=".MyRecipesActivity"></activity>
+        <activity android:name=".ViewRecipeActivity"></activity>
+        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".RecipeListActivity"></activity>
+        <activity android:name=".UserRecipesActivity"></activity>
+        <activity android:name=".BookmarksActivity"></activity>
+        <activity android:name=".SearchActivity"></activity>
+    </application>
+    
+    <uses-permission android:name="android.permission.INTERNET"/>
 
 </manifest>

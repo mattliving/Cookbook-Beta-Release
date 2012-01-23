@@ -2,11 +2,12 @@
 
 package com.cookbook;
 
-import com.cookbook.core.RecipeList;
+import com.cookbook.RecipeList;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.SearchManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
 import android.view.Menu;
@@ -30,7 +31,7 @@ public class SearchActivity extends Activity
     Spinner mMenuMode;
     EditText text;
     EditText mQueryAppData;
-    CookBookDbAdapter mDbHelper;
+    CookbookDBAdapter mDbHelper;
     
     RecipeList list;
     ListView listvw;
@@ -46,7 +47,7 @@ public class SearchActivity extends Activity
         // Inflate our UI from its XML layout description.
         setContentView(R.layout.search);
         
-        mDbHelper = new CookBookDbAdapter(this);
+        mDbHelper = new CookbookDBAdapter(this);
         mDbHelper.open();
         
         // Get display items for later interaction
@@ -83,10 +84,10 @@ public class SearchActivity extends Activity
     	    public void onItemClick(AdapterView<?> parent, View view,
     	        int position, long id) {
     	      // When clicked, show a toast with the TextView text
-    	      Toast.makeText(getApplicationContext(), 
-    	    "Ingredients: "+list.getRecipe(position).getIngredients()+"\nPreparation: "+list.getRecipe(position).getPreparation()
-    	    +"\nType: "+list.getRecipe(position).getType()+"\nRegion: "+list.getRecipe(position).getRegion(),
-    	          Toast.LENGTH_SHORT).show();
+    	    	Intent recIntent = new Intent(view.getContext(),ViewRecipeActivity.class);
+    	    	// trying to send the recipe name to the new activity
+    	    	recIntent.putExtra("recipeName",list.getRecipe(position).getName());
+    	    	startActivity(recIntent);
     	      }
             }); 
     	  
@@ -185,10 +186,15 @@ public class SearchActivity extends Activity
     public boolean onSearchRequested() {
         // If your application absolutely must disable search, do it here.
         if (text.length() <1) {
-            return false;
+            list.clearList();
+            list.fetchAllRecipes(mDbHelper);
         }
+        else {
         list.clearList();
-        list.fetchByName(mDbHelper, text.getText().toString());
+        String rName = text.getText().toString();
+        list.fetchByName(mDbHelper, rName);
+        list.fetchByName(mDbHelper, rName.toLowerCase());
+        }
         
         if (list.size()>0){
         	RECIPES = new String[list.size()];

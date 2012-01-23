@@ -14,7 +14,7 @@
         android:id="@+id/autoCompleteTextView1"
         android:layout_width="256dp"
         android:layout_height="wrap_content"
-        android:text="AutoCompleteTextView" >
+        android:text="" >
 
         <requestFocus />
     </AutoCompleteTextView>
