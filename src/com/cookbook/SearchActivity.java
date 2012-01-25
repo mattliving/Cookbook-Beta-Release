@@ -194,6 +194,21 @@ public class SearchActivity extends Activity
         String rName = text.getText().toString();
         list.fetchByName(mDbHelper, rName);
         list.fetchByName(mDbHelper, rName.toLowerCase());
+        list.fetchByPatternName(mDbHelper, rName.toLowerCase()+"%");
+        list.fetchByPatternName(mDbHelper, "%"+rName.toLowerCase()+"%");
+        for (int i=1;i<rName.length()-1;i++)
+        {
+        	// TO-DO not working
+        	String nName = new String(rName.substring(0, i-1));
+        	nName.concat("_");
+        	rName.concat(rName.substring(i+1, rName.length()-1));
+        	list.fetchByPatternName(mDbHelper, nName.toLowerCase());
+        }
+        for (int i=rName.length()/2;i<rName.length()-1;i++)
+        {
+        	String nName = new String(rName.substring(i,rName.length()-1));
+        	list.fetchByPatternName(mDbHelper, nName.toLowerCase()+"%");
+        }
         }
         
         if (list.size()>0){

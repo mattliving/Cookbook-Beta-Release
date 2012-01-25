@@ -170,6 +170,27 @@ public class CookbookDBAdapter {
         }
         return mCursor;
     }
+    
+    
+     /** 
+      * Search the recipes for patterns in the name
+      * http://www.w3schools.com/sql/sql_like.asp
+      * @param recipeName
+      * @return Cursor
+      * @throws SQLException
+      */
+    	 public Cursor fetchRecipeLike(String recipeName) throws SQLException {
+
+         Cursor mCursor = mDb.query(false, RECIPE_TABLE,
+         	new String[] {PKEY_RECIPE_ID, KEY_RECIPE_NAME, KEY_METHOD,
+         	KEY_MEAL_TYPE, KEY_DURATION, KEY_TIME_OF_YEAR, KEY_REGION},
+         	KEY_RECIPE_NAME + " LIKE " + "'"+recipeName+"'", null, null, null, null, null);
+
+         if (mCursor != null) {
+             mCursor.moveToFirst();
+         }
+         return mCursor;
+     }
    
     // Update recipe at given recipe ID with the values passed
     public boolean updateRecipe(long recipeId, String recipeName, String method,
