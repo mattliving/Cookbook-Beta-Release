@@ -146,7 +146,7 @@ public class readFile  {
 	 * @param fos
 	 * @return
 	 */
-	public Vector<Long> readIDs(InputStream fos){
+	public Vector<Long> readIDs(FileInputStream fos){
 	
 	this.fos = fos;
 	this.list = new RecipeList();

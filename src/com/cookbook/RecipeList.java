@@ -51,7 +51,7 @@ public class RecipeList {
 	public void removeRecipe(String name){
 		for (int i =0;i< list.size();i++)
 		{
-			if (list.get(i).getName() == name) {
+			if (list.get(i).getName().equals(name)) {
 				list.remove(i);
 				return;
 			}
@@ -88,7 +88,7 @@ public class RecipeList {
 	public boolean contains(String name){
 		for (int i =0;i< list.size();i++)
 		{
-			if (list.get(i).getName() == name) {
+			if (list.get(i).getName().equals(name)) {
 				
 				return true;
 			}

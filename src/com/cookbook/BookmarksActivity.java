@@ -1,5 +1,8 @@
 package com.cookbook;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
 import com.cookbook.RecipeList;
@@ -44,9 +47,21 @@ public class BookmarksActivity extends ListActivity {
         /*
          * Add the database entries to the list
          */
-        InputStream fos = myResources.openRawResource(R.raw.bookmarks);
-        rd = new readFile();
-        list.fetchFromIDs(rd.readIDs(fos),mDbHelper);
+        FileInputStream fos;
+        try {
+			fos = openFileInput("bookmarks");
+			rd = new readFile();
+	        list.fetchFromIDs(rd.readIDs(fos),mDbHelper);
+	        try {
+				fos.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
        
         

@@ -45,7 +45,7 @@ public class UserRecipesActivity extends ListActivity {
          */
         InputStream fos = myResources.openRawResource(R.raw.userrecipes);
         rd = new readFile();
-        list.fetchFromIDs(rd.readIDs(fos),mDbHelper);
+        //list.fetchFromIDs(rd.readIDs(fos),mDbHelper);
         
        
         

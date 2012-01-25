@@ -1,6 +1,7 @@
 package com.cookbook;
 
 import java.io.BufferedWriter;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import java.io.OutputStreamWriter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -66,9 +68,22 @@ public class ViewRecipeActivity extends Activity
         /*
          * Add the database entries to the list
          */
-        InputStream fos = myResources.openRawResource(R.raw.bookmarks);
-        rd = new readFile();
-        bookmarks.fetchFromIDs(rd.readIDs(fos),mDbHelper);
+        FileInputStream fos;
+		try {
+			fos = openFileInput("bookmarks");
+			rd = new readFile();
+	        bookmarks.fetchFromIDs(rd.readIDs(fos),mDbHelper);
+	        try {
+				fos.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e) {
+			Toast.makeText(getApplicationContext(),"not found",Toast.LENGTH_SHORT).show();
+			e.printStackTrace();
+		}
+        
         
         //If it doesn't find the recipe crashes
         recipe = mDbHelper.fetchRecipe(recipeName);
@@ -93,8 +108,12 @@ public class ViewRecipeActivity extends Activity
 
         setLabels(recipeName, method, mealType, duration, timeOfYear, region);
         
-        if (bookmarks.contains(recipeName)) bookmark.setChecked(true);
-        
+        if (bookmarks.contains(recipeName)) {
+        	Toast.makeText(getApplicationContext(), "contained", Toast.LENGTH_SHORT).show();
+        	bookmark.setChecked(true);
+        	
+        }
+      
         /**
          * Facebook Share Button
          */
@@ -141,6 +160,7 @@ public class ViewRecipeActivity extends Activity
 					bookmarks.addRecipe(new Recipe(recipeName,"",method,recipeID,mealType,
 							0,timeOfYear,region,0f));
 					writeBookmarks(bookmarks);
+					
 				}
 				else
 				{
@@ -227,24 +247,31 @@ public class ViewRecipeActivity extends Activity
     public void writeBookmarks(RecipeList list)
     {
     	 try {
-			FileOutputStream ros = openFileOutput("bookmarks", Context.MODE_PRIVATE);
+    		 
+    		 FileOutputStream ros = openFileOutput("bookmarks", Context.MODE_PRIVATE);
 			OutputStreamWriter output = new OutputStreamWriter(ros);
 			BufferedWriter wr = new BufferedWriter(output);
 			for (int i =0; i< bookmarks.size();i++)
 			{
-				int j = (int) bookmarks.getRecipe(i).identifier;
+				long j =  bookmarks.getRecipe(i).identifier;
+				String id = Long.toString(j);
 				try {
-					wr.write(j);
+					wr.write(id);
 					wr.write("\n");
-					ros.close();
+					wr.flush();
+					
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
 			}
+			ros.close();
 			
 		} catch (FileNotFoundException e) {
+			Toast.makeText(getApplicationContext(),"not found",Toast.LENGTH_SHORT).show();
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
