@@ -6,6 +6,7 @@ import com.cookbook.RecipeList;
 import com.cookbook.readFile;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
@@ -85,10 +86,10 @@ public class UserRecipesActivity extends ListActivity {
 	    public void onItemClick(AdapterView<?> parent, View view,
 	        int position, long id) {
 	      // When clicked, show a toast with the TextView text
-	      Toast.makeText(getApplicationContext(), 
-	    "Ingredients: "+list.getRecipe(position).getIngredients()+"\nPreparation: "+list.getRecipe(position).getPreparation()
-	    +"\nType: "+list.getRecipe(position).getType()+"\nRegion: "+list.getRecipe(position).getRegion(),
-	          Toast.LENGTH_SHORT).show();
+	    	Intent recIntent = new Intent(view.getContext(),ViewRecipeActivity.class);
+	    	// trying to send the recipe name to the new activity
+	    	recIntent.putExtra("recipeName",list.getRecipe(position).getName());
+	    	startActivity(recIntent);
 	      }
         });
     }

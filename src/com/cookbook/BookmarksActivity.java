@@ -9,6 +9,7 @@ import com.cookbook.RecipeList;
 import com.cookbook.readFile;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
@@ -101,14 +102,68 @@ public class BookmarksActivity extends ListActivity {
 	  lv.setOnItemClickListener(new OnItemClickListener() {
 	    public void onItemClick(AdapterView<?> parent, View view,
 	        int position, long id) {
-	      // When clicked, show a toast with the TextView text
-	      Toast.makeText(getApplicationContext(), 
-	    "Ingredients: "+list.getRecipe(position).getIngredients()+"\nPreparation: "+list.getRecipe(position).getPreparation()
-	    +"\nType: "+list.getRecipe(position).getType()+"\nRegion: "+list.getRecipe(position).getRegion(),
-	          Toast.LENGTH_SHORT).show();
+	    	Intent recIntent = new Intent(view.getContext(),ViewRecipeActivity.class);
+	    	// trying to send the recipe name to the new activity
+	    	recIntent.putExtra("recipeName",list.getRecipe(position).getName());
+	    	startActivity(recIntent);
 	      }
         });
     }
+	
+	/**
+	 * Updates the content when tab is selected
+	 */
+	public void onResume(){
+		
+		super.onResume();
+		FileInputStream fos;
+		list.clearList();
+        try {
+			fos = openFileInput("bookmarks");
+			rd = new readFile();
+	        list.fetchFromIDs(rd.readIDs(fos),mDbHelper);
+	        try {
+				fos.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+       
+        
+        /**
+  	   * adding the list to the recipeArray used to display it
+  	   */
+        
+      if (list.size()>0)
+      {  
+  	  RECIPES = new String[list.size()];
+  	  for (int i =0; i<list.size();i++){
+  		  RECIPES[i] = list.getRecipe(i).getName()+"\nType: "+list.getRecipe(i).getType();
+  		  System.out.println(list.getRecipe(i).getName());
+  	  }
+      }
+      else
+      {
+    	  RECIPES = new String[1];
+    	  RECIPES[0] = "No Bookmarks added yet";
+      }
+        
+     // list_item is in /res/layout/ should be created
+      arrayadp = new ArrayAdapter<String>(this, R.layout.list_item, RECIPES);
+  	  setListAdapter(arrayadp);
+
+
+
+  	  final ListView lv = getListView();
+  	  lv.setTextFilterEnabled(true);
+
+	}
+	
 	
 	/** need it*/
 	 String[] RECIPES = new String[]{"lol"};

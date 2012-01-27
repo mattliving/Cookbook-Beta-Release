@@ -5,11 +5,14 @@
 package com.cookbook;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.Vector;
 
 import com.cookbook.Recipe.Season;
@@ -17,6 +20,8 @@ import com.cookbook.Recipe.TypeOfMeal;
 
 import android.app.Activity;
 import android.content.Context;
+import android.widget.Toast;
+import android.content.*;
 
 /**
  * Parse a file from an input stream and generates a list of recipes.
@@ -174,4 +179,45 @@ public class readFile  {
 	return ids;
 	
 	}
+	
+	
+	 /**
+     * Write the bookmarks ids in the raw file
+     * @param list
+     */
+    public void writeIDs(RecipeList list,FileOutputStream ros)
+    {
+    	 try {
+			OutputStreamWriter output = new OutputStreamWriter(ros);
+			BufferedWriter wr = new BufferedWriter(output);
+			for (int i =0; i< list.size();i++)
+			{
+				long j =  list.getRecipe(i).identifier;
+				String id = Long.toString(j);
+				try {
+					wr.write(id);
+					wr.write("\n");
+					wr.flush();
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			ros.close();
+			
+		} catch (FileNotFoundException e) {
+			
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+    	
+    }
+	
+	
+	
 }
