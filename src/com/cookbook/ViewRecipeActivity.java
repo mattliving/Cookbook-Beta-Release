@@ -182,7 +182,12 @@ public class ViewRecipeActivity extends Activity
         /**
          * RATING BUTTON
          */
-        //TO_DO
+        rating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+        	
+        	public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser){
+        		
+        	}
+        });
         
     }
     

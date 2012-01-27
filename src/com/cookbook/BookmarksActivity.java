@@ -116,6 +116,7 @@ public class BookmarksActivity extends ListActivity {
 	public void onResume(){
 		
 		super.onResume();
+		
 		FileInputStream fos;
 		list.clearList();
         try {
