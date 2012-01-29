@@ -42,6 +42,7 @@ public class ViewRecipeActivity extends Activity
 	private String duration;
 	private String timeOfYear;
 	private String region;
+	private float ratingVal;
 	
 	Resources myResources;
 	readFile rd;
@@ -104,8 +105,16 @@ public class ViewRecipeActivity extends Activity
         duration = recipe.getString(4);
         timeOfYear = recipe.getString(5);
         region = recipe.getString(6);
+        String rt = recipe.getString(7);
+       
+        if (rt != null){
+        	ratingVal = Float.valueOf((rt)).floatValue();
+        	rating.setRating(ratingVal);
+        }
+        
 
         setLabels(recipeName, method, mealType, duration, timeOfYear, region);
+        
         
         if (bookmarks.contains(recipeName)) {
         	bookmark.setChecked(true);
@@ -185,7 +194,7 @@ public class ViewRecipeActivity extends Activity
         rating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
         	
         	public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser){
-        		
+        		mDbHelper.updateRecipe(recipeID, rating);
         	}
         });
         

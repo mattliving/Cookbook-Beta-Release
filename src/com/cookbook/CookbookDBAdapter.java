@@ -22,6 +22,7 @@ public class CookbookDBAdapter {
     public static final String KEY_DURATION = "duration";
     public static final String KEY_TIME_OF_YEAR = "timeOfYear";
     public static final String KEY_REGION = "region";
+    public static final String KEY_RATING = "rating";
     /**
      * [comments from Giulio]
      * WE NEED 3 Other fields:
@@ -41,6 +42,11 @@ public class CookbookDBAdapter {
     public static final String PKEY_INGREDIENT_ID = "_id";
     public static final String KEY_INGREDIENT = "ingredient";
 
+    // friends table fields
+    public static final String PKEY_FACEBOOK_ID = "_id";
+    public static final String KEY_FIRSTNAME = "firstName";
+    public static final String KEY_SURNAME = "surname";
+
     /* TAG is used to identify this class in log messages
     private static final String TAG = "CookBookDbAdapter";*/
     
@@ -48,27 +54,39 @@ public class CookbookDBAdapter {
     private SQLiteDatabase mDb;
     
     // sql create table strings
+    // recipe table
     private static final String RECIPE_TABLE_CREATE =
        	"create table recipe (" + PKEY_RECIPE_ID + " integer primary key " +
        	"autoincrement, " + KEY_RECIPE_NAME + " text not null, " + KEY_METHOD +
        	" text not null, " + KEY_MEAL_TYPE + " text," + KEY_DURATION +
-       	" integer, " + KEY_TIME_OF_YEAR + " text, " + KEY_REGION + " text);";
+       	" integer, " + KEY_TIME_OF_YEAR + " text, " + KEY_REGION + " text," +
+       	KEY_RATING + " integer);";
     
+    // recipeIngredients table
     private static final String RECIPE_INGREDIENTS_TABLE_CREATE =
            	"create table recipeIngredients (" + PKEY_RECIPE_INGREDIENT_ID +
            	" integer primary key autoincrement, " + FKEY_RECIPE_ID +
            	" integer not null, " + FKEY_INGREDIENT_ID + " integer not null, " +
            	KEY_QUANTITY + " integer, " + KEY_UNIT + " string);";
     
+    // ingredients table
     private static final String INGREDIENTS_TABLE_CREATE =
            	"create table ingredients (" + PKEY_INGREDIENT_ID +
            	" integer primary key autoincrement, " + KEY_INGREDIENT +
            	" text not null);";
-    
+
+    // friends table
+    private static final String FRIENDS_TABLE_CREATE =
+           	"create table friends (" + PKEY_FACEBOOK_ID +
+           	" integer primary key autoincrement, " + KEY_FIRSTNAME +
+           	" text, " + KEY_SURNAME + " text);";
+
+    // database and table name strings
     private static final String DATABASE_NAME = "cookbook";
     private static final String RECIPE_TABLE = "recipe";
     private static final String RECIPE_INGREDIENTS_TABLE = "recipeIngredients";
     private static final String INGREDIENTS_TABLE = "ingredients";
+    private static final String FRIENDS_TABLE = "friends";
     private static final int DATABASE_VERSION = 1;
     
     private final Context mContext;
@@ -85,6 +103,7 @@ public class CookbookDBAdapter {
             db.execSQL(RECIPE_TABLE_CREATE);
             db.execSQL(RECIPE_INGREDIENTS_TABLE_CREATE);
             db.execSQL(INGREDIENTS_TABLE_CREATE);
+            db.execSQL(FRIENDS_TABLE_CREATE);
         }
 
         // to be completed
@@ -112,9 +131,8 @@ public class CookbookDBAdapter {
     }
 
     // create a new recipe using values provided in parameters
-    // call time and weight conversion here?
     public long createRecipe(String recipeName, String method, String mealType,
-    	Integer duration, String timeOfYear, String region) {
+    	int duration, String timeOfYear, String region) {
     	
     	ContentValues addValues = new ContentValues();
     	addValues.put(KEY_RECIPE_NAME, recipeName);
@@ -123,6 +141,7 @@ public class CookbookDBAdapter {
     	addValues.put(KEY_DURATION, duration);
     	addValues.put(KEY_TIME_OF_YEAR, timeOfYear);
     	addValues.put(KEY_REGION, region);
+    	//addValues.put(KEY_RATING, region);
 
         return mDb.insert(RECIPE_TABLE, null, addValues);
     }
@@ -140,7 +159,7 @@ public class CookbookDBAdapter {
     public Cursor fetchAllRecipes() {
         return mDb.query(RECIPE_TABLE, new String[] {PKEY_RECIPE_ID,
         	KEY_RECIPE_NAME, KEY_METHOD, KEY_MEAL_TYPE, KEY_DURATION,
-        	KEY_TIME_OF_YEAR, KEY_REGION}, null, null, null, null, null);
+        	KEY_TIME_OF_YEAR, KEY_REGION, KEY_RATING}, null, null, null, null, null);
     }
 
     // return cursor at recipe with given recipeID 
@@ -148,7 +167,7 @@ public class CookbookDBAdapter {
 
         Cursor mCursor = mDb.query(true, RECIPE_TABLE,
         	new String[] {PKEY_RECIPE_ID, KEY_RECIPE_NAME, KEY_METHOD,
-        	KEY_MEAL_TYPE, KEY_DURATION, KEY_TIME_OF_YEAR, KEY_REGION},
+        	KEY_MEAL_TYPE, KEY_DURATION, KEY_TIME_OF_YEAR, KEY_REGION, KEY_RATING},
         	PKEY_RECIPE_ID + "=" + recipeId, null, null, null, null, null);
 
         if (mCursor != null) {
@@ -162,39 +181,38 @@ public class CookbookDBAdapter {
 
         Cursor mCursor = mDb.query(false, RECIPE_TABLE,
         	new String[] {PKEY_RECIPE_ID, KEY_RECIPE_NAME, KEY_METHOD,
-        	KEY_MEAL_TYPE, KEY_DURATION, KEY_TIME_OF_YEAR, KEY_REGION},
-        	KEY_RECIPE_NAME + "=" + "'"+recipeName+"'", null, null, null, null, null);
+        	KEY_MEAL_TYPE, KEY_DURATION, KEY_TIME_OF_YEAR, KEY_REGION, KEY_RATING},
+        	KEY_RECIPE_NAME + "=" + "'" +recipeName+ "'", null, null, null, null, null);
 
         if (mCursor != null) {
             mCursor.moveToFirst();
         }
         return mCursor;
     }
-    
-    
-     /** 
-      * Search the recipes for patterns in the name
-      * http://www.w3schools.com/sql/sql_like.asp
-      * @param recipeName
-      * @return Cursor
-      * @throws SQLException
-      */
-    	 public Cursor fetchRecipeLike(String recipeName) throws SQLException {
+      
+    /** 
+     * Search the recipes for patterns in the name
+     * http://www.w3schools.com/sql/sql_like.asp
+     * @param recipeName
+     * @return Cursor
+     * @throws SQLException
+     */
+    public Cursor fetchRecipeLike(String recipeName) throws SQLException {
 
-         Cursor mCursor = mDb.query(false, RECIPE_TABLE,
-         	new String[] {PKEY_RECIPE_ID, KEY_RECIPE_NAME, KEY_METHOD,
-         	KEY_MEAL_TYPE, KEY_DURATION, KEY_TIME_OF_YEAR, KEY_REGION},
-         	KEY_RECIPE_NAME + " LIKE " + "'"+recipeName+"'", null, null, null, null, null);
+    	Cursor mCursor = mDb.query(false, RECIPE_TABLE,
+    		new String[] {PKEY_RECIPE_ID, KEY_RECIPE_NAME, KEY_METHOD,
+    		KEY_MEAL_TYPE, KEY_DURATION, KEY_TIME_OF_YEAR, KEY_REGION, KEY_RATING},
+    		KEY_RECIPE_NAME + " LIKE " + "'"+recipeName+"'", null, null, null, null, null);
 
-         if (mCursor != null) {
-             mCursor.moveToFirst();
-         }
-         return mCursor;
-     }
+    	if (mCursor != null) {
+    		mCursor.moveToFirst();
+    	}
+    	return mCursor;
+    }
    
     // Update recipe at given recipe ID with the values passed
     public boolean updateRecipe(long recipeId, String recipeName, String method,
-    	String mealType, Integer duration, String timeOfYear, String region) {
+    	String mealType, int duration, String timeOfYear, String region) {
 
         ContentValues newValues = new ContentValues();
     	newValues.put(KEY_RECIPE_NAME, recipeName);
@@ -208,9 +226,17 @@ public class CookbookDBAdapter {
         	PKEY_RECIPE_ID + "=" + recipeId, null) > 0;
     }
 
+    public boolean updateRecipe(long recipeId, float rating) {
+        ContentValues newValues = new ContentValues();
+        newValues.put(KEY_RATING, rating);
+        
+        return mDb.update(RECIPE_TABLE, newValues,
+        	PKEY_RECIPE_ID + "=" + recipeId, null) > 0;
+    }
+
     // create a new recipeIngredient using values provided in parameters
-    public long createRecipeIngredient(Integer recipeId, Integer ingredientId,
-    	Integer quantity, String unit) {
+    public long createRecipeIngredient(long recipeId, long ingredientId,
+    	int quantity, String unit) {
     	
     	ContentValues addValues = new ContentValues();
     	addValues.put(FKEY_RECIPE_ID, recipeId);
@@ -221,6 +247,21 @@ public class CookbookDBAdapter {
         return mDb.insert(RECIPE_INGREDIENTS_TABLE, null, addValues);
     }
 
+/* To be completed 
+ * // create a new recipeIngredient using values provided in parameters
+    public long updateRecipeIngredient(long recipeIngredientId, long recipeId, 
+    	long ingredientId, int quantity, String unit) {
+    	
+    	ContentValues newValues = new ContentValues();
+    	newValues .put(FKEY_RECIPE_ID, recipeId);
+    	newValues .put(FKEY_INGREDIENT_ID, ingredientId);
+    	newValues.put(KEY_QUANTITY, quantity);
+    	newValues.put(KEY_UNIT, unit);
+    	
+        return mDb.update(RECIPE_INGREDIENTS_TABLE, newValues, 
+        	PKEY_RECIPE_ID + "=" + recipeIngredientId, null);
+    }*/
+    
     // return cursor at recipe with given recipeID 
     public Cursor fetchRecipeIngredient(long recipeId) throws SQLException {
 
@@ -263,7 +304,7 @@ public class CookbookDBAdapter {
 
         Cursor mCursor = mDb.query(true, INGREDIENTS_TABLE,
         	new String[] {PKEY_INGREDIENT_ID, KEY_INGREDIENT},
-        	KEY_INGREDIENT + "=" + ingredientName,
+        	KEY_INGREDIENT + "= '" + ingredientName + "'",
         	null, null, null, null, null);
 
         if (mCursor != null) {
@@ -271,4 +312,13 @@ public class CookbookDBAdapter {
         }
         return mCursor;
     }
+
+    // create a new ingredient using ingredient name provided in parameters
+    /*public long createFriend() {
+    	
+    	ContentValues addValues = new ContentValues();
+    	addValues.put(KEY_INGREDIENT, ingredient);
+    	
+        return mDb.insert(INGREDIENTS_TABLE, null, addValues);
+    }*/
 }
