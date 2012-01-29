@@ -21,7 +21,6 @@ import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.cookbook.facebook.BaseDialogListener;
-import com.cookbook.GlobalVars;
 import com.cookbook.facebook.UpdateStatusResultDialog;
 import com.facebook.android.Facebook;
 import com.facebook.android.FacebookError;

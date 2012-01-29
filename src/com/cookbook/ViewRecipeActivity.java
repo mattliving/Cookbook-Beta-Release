@@ -56,7 +56,6 @@ public class ViewRecipeActivity extends Activity
     {
         super.onCreate(savedInstanceState);	
         setContentView(R.layout.view_recipe);
-        mFacebook = GlobalVars.facebook;
         mDbHelper = new CookbookDBAdapter(this);
         mDbHelper.open();
         Bundle b = getIntent().getExtras();
