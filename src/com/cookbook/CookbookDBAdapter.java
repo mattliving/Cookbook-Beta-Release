@@ -132,7 +132,7 @@ public class CookbookDBAdapter {
 
     // create a new recipe using values provided in parameters
     public long createRecipe(String recipeName, String method, String mealType,
-    	int duration, String timeOfYear, String region) {
+    	int duration, String timeOfYear, String region, float rating) {
     	
     	ContentValues addValues = new ContentValues();
     	addValues.put(KEY_RECIPE_NAME, recipeName);
@@ -141,7 +141,7 @@ public class CookbookDBAdapter {
     	addValues.put(KEY_DURATION, duration);
     	addValues.put(KEY_TIME_OF_YEAR, timeOfYear);
     	addValues.put(KEY_REGION, region);
-    	//addValues.put(KEY_RATING, region);
+    	addValues.put(KEY_RATING, rating);
 
         return mDb.insert(RECIPE_TABLE, null, addValues);
     }
@@ -189,6 +189,30 @@ public class CookbookDBAdapter {
         }
         return mCursor;
     }
+    
+    /**
+     * Query used for suggestFromBookmarks
+     * @param type
+     * @param season
+     * @param cookingtime
+     * @return
+     * @throws SQLException
+     */
+    public Cursor fetchRecipe(String type,String season,int cookingtime) throws SQLException {
+
+        Cursor mCursor = mDb.query(false, RECIPE_TABLE,
+        	new String[] {PKEY_RECIPE_ID, KEY_RECIPE_NAME, KEY_METHOD,
+        	KEY_MEAL_TYPE, KEY_DURATION, KEY_TIME_OF_YEAR, KEY_REGION, KEY_RATING},
+        	KEY_MEAL_TYPE + "=" + "'" +type+ "'"+" AND "+KEY_TIME_OF_YEAR+"="+"'"+season+"'"+
+        	" AND "+KEY_DURATION+"<="+"'"+cookingtime+"'",
+        		null, null, null, null, null);
+
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+        }
+        return mCursor;
+    }
+    
       
     /** 
      * Search the recipes for patterns in the name

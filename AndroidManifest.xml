@@ -26,6 +26,7 @@
         <activity android:name=".UserRecipesActivity"></activity>
         <activity android:name=".BookmarksActivity"></activity>
         <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".SuggestionActivity"></activity>
     </application>
     
     <uses-permission android:name="android.permission.INTERNET"/>

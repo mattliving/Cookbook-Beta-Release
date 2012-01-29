@@ -36,7 +36,8 @@ public class RecipeList {
 	}
 	
 	public void addRecipe(Recipe recipe){
-		list.add(recipe);
+		
+		if (!list.contains(recipe)) list.add(recipe);
 	}
 	
 	/**
