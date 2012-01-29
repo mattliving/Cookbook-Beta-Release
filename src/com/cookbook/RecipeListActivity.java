@@ -15,8 +15,6 @@ import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-//Trying commit and removing cookbook folder
-
 public class RecipeListActivity extends ListActivity {
     
 	/**
@@ -43,7 +41,6 @@ public class RecipeListActivity extends ListActivity {
         //createIngredient();
         //createRecipeIngredients();
         
-        
         /*
          * Add the database entries to the list
          */
@@ -61,33 +58,20 @@ public class RecipeListActivity extends ListActivity {
   	  for (int i =0; i<list.size();i++){
   		  RECIPES[i] = list.getRecipe(i).getName()+"\nType: "+list.getRecipe(i).getType();
   		  System.out.println(list.getRecipe(i).getName());
-  	  }
-        
+  	  } 
         
      // list_item is in /res/layout/ should be created
   	  setListAdapter(new ArrayAdapter<String>(this, R.layout.list_item, RECIPES));
 
-
-
   	  lv = getListView();
   	  lv.setTextFilterEnabled(true);
 
-        
-        
-
-  	/**
-	   * Onclik show the info about the Recipe on a popup message
+  	  /**
+	   * On-click show the info about the Recipe on a popup message
 	   */
 	  lv.setOnItemClickListener(new OnItemClickListener() {
 	    public void onItemClick(AdapterView<?> parent, View view,
 	        int position, long id) {
-	      // When clicked, show a toast with the TextView text
-	     /* Toast.makeText(getApplicationContext(), 
-	    "Ingredients: "+list.getRecipe(position).getIngredients()+"\nPreparation: "+list.getRecipe(position).getPreparation()
-	    +"\nType: "+list.getRecipe(position).getType()+"\nRegion: "+list.getRecipe(position).getRegion(),
-	          Toast.LENGTH_SHORT).show();
-	          */
-	    	//Toast.makeText(getApplicationContext(),"clicked",Toast.LENGTH_SHORT).show();
 	    	Intent recIntent = new Intent(view.getContext(),ViewRecipeActivity.class);
 	    	// trying to send the recipe name to the new activity
 	    	recIntent.putExtra("recipeName",list.getRecipe(position).getName());
@@ -96,7 +80,6 @@ public class RecipeListActivity extends ListActivity {
 	      }
         });
     }
-    
     
     private void createRecipe() {
     	mDbHelper.createRecipe("Spaghetti Bolgnaise", "1. Step1\n2. Step2\n" +
@@ -133,10 +116,7 @@ public class RecipeListActivity extends ListActivity {
     	lv.setTextFilterEnabled(true);
     }
     
-    
     /** need it*/
 	 String[] RECIPES = new String[]{"lol"};
-
-    
-    
+   
 }

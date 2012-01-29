@@ -10,7 +10,6 @@ package com.cookbook;
  */
 public class Recipe {
 	
-	
 	public enum TypeOfMeal { MAIN, SECOND, DESSERT, NULL }; // NOT FINAL
 	public enum Season { SPRING, SUMMER, AUTUMN, WINTER, NULL};
 	
@@ -23,7 +22,6 @@ public class Recipe {
 	protected String season;
 	protected String mRegion;
 	protected float mRating;
-		
 	
 	/**
 	 * Constructor
@@ -51,7 +49,6 @@ public class Recipe {
 	this.mRating = mRating;
 	
 	}
-	
 	
 	//Get Functions to access class protected fields 
 	
@@ -90,8 +87,4 @@ public class Recipe {
 	public float getRating(){
 		return this.mRating;
 	}
-	
-	
-	
-
 }

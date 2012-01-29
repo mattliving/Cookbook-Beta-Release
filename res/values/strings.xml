@@ -9,8 +9,14 @@
     <string name="delete_post">Delete Post</string>
     <string name="tip_label">Tip:</string>
     <string name="post_tip">\'read_stream\' permission is required to view and delete the post.\n\nUse SDK dialogs to publish stories or post on friends wall. <a href="https://developers.facebook.com/docs/reference/dialogs">More info</a>\n\n<a href="https://developers.facebook.com/docs/reference/api/Comment">Like and Comment on a post</a></string>
+    
     <string name="exception">Exception: </string>
     <string name="facebook_error">Facebook Error: </string>
+    <string name="post_on_wall_title">Post on wall?</string>
+    <string name="post_on_wall">Would you like to post on %1$s\'s wall</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="app_name">Cookbook</string>
         
     <string name="Ingredient">Ingredient</string>
     <string name="Amount">Amount (weight, volume etc.)</string>

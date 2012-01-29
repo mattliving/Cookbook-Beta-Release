@@ -7,7 +7,7 @@ import android.content.Intent;
 
 import com.cookbook.RecipeListActivity;
 
-public class MyRecipesActivity  extends TabActivity{
+public class MyRecipesActivity extends TabActivity {
 
 	 @Override
 	    protected void onCreate(Bundle savedInstanceState) {

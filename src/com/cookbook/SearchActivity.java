@@ -27,7 +27,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 
 public class SearchActivity extends Activity
 {  
-        // UI elements
+    // UI elements
     Button mStartSearch;
     Spinner mMenuMode;
     EditText text;
@@ -76,9 +76,6 @@ public class SearchActivity extends Activity
     	  arrayadp = new ArrayAdapter<String>(this, R.layout.list_item, RECIPES);
       	  listvw.setAdapter(arrayadp);
 
-
-
-      	  
       	  listvw.setTextFilterEnabled(true);
         
     	  /**
@@ -94,11 +91,7 @@ public class SearchActivity extends Activity
     	    	startActivity(recIntent);
     	      }
             }); 
-    	  
-    	  
-    	  
-    	  
-    	  
+  
         //TODO Populate items
        /* ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                             this, R.array.search_menuModes, android.R.layout.simple_spinner_item);
@@ -126,7 +119,6 @@ public class SearchActivity extends Activity
             });
         */
         
-        
         // Attach actions to buttons
         mStartSearch.setOnClickListener(
             new OnClickListener() {
@@ -135,9 +127,7 @@ public class SearchActivity extends Activity
                 }
             });
     }
-    
-    
-    
+
     /** Handle the menu item selections */
     /*@Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -209,15 +199,13 @@ public class SearchActivity extends Activity
       	  for (int i =0; i<list.size();i++){
       		  RECIPES[i] = list.getRecipe(i).getName()+"\nType: "+list.getRecipe(i).getType();
       		  System.out.println(list.getRecipe(i).getName());
-      	  }
-      	
+      	  }    	
         }
         else
         {
         	RECIPES = new String[1];
         	RECIPES[0] = "No results found";
-        }
-   
+        }  
       	
         arrayadp = new ArrayAdapter<String>(this, R.layout.list_item, RECIPES);
         
@@ -227,11 +215,7 @@ public class SearchActivity extends Activity
         // Returning true indicates that we did launch the search, instead of blocking it.
         return true;
     }
-    
-    
-    
-    
-    
+
     /**
      * Any application that implements search suggestions based on previous actions (such as
      * recent queries, page/items viewed, etc.) should provide a way for the user to clear the
@@ -250,8 +234,7 @@ public class SearchActivity extends Activity
                 SearchSuggestionSampleProvider.AUTHORITY, SearchSuggestionSampleProvider.MODE);
         suggestions.clearHistory();
     }*/
-    
-    
+       
     /** need it*/
 	 String[] RECIPES = new String[]{"lol"};
     

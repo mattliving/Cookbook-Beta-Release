@@ -3,8 +3,6 @@ package com.cookbook;
 import com.cookbook.CookbookDBAdapter;
 
 public class Search {
-
-	
 	CookbookDBAdapter mDbHelper;
 	
 	public Search (CookbookDBAdapter mDbHelper){
@@ -12,7 +10,6 @@ public class Search {
 		 this.mDbHelper = mDbHelper;
 	    
 	}
-	
 	
 	public void searchByName(RecipeList list,String text){
 		if (text.length() <1) {
@@ -27,33 +24,26 @@ public class Search {
         list.fetchByName(mDbHelper, text.toLowerCase());
 	}
 		
-	
-	
 	public void searchByPatternName(RecipeList list,String text){
 		if (text.length() <1) {
             list.clearList();
             list.fetchAllRecipes(mDbHelper);
             return;
         }
-        
-        
-		
+
 		
 		/*list.fetchByPatternName(mDbHelper, text.toLowerCase()+"%"+
 		"' AND recipeName<>"+"'"+text);*/
         list.fetchByPatternName(mDbHelper, "%"+text.toLowerCase()+"%"+
 		"' AND recipeName<>"+"'"+text);
 	}
-	
-	
-	
+		
 	public void searchByName_TypingError(RecipeList list,String text){
 		if (text.length() <1) {
             list.clearList();
             list.fetchAllRecipes(mDbHelper);
             return;
-        }
-        
+        } 
         
         for (int i=1;i<text.length()-1;i++)
         {
@@ -80,5 +70,4 @@ public class Search {
     			"' AND recipeName<>"+"'"+rName);
 		}
 	}
-	
 }
