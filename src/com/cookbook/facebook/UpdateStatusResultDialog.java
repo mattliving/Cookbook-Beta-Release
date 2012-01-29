@@ -13,15 +13,11 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.cookbook.GlobalVars;
 import com.cookbook.R;
-import com.facebook.android.AsyncFacebookRunner;
-import com.facebook.android.Facebook;
+import com.cookbook.Utility;
 import com.facebook.android.FacebookError;
 
 public class UpdateStatusResultDialog extends Dialog {
-	private Facebook mFacebook;
-	private AsyncFacebookRunner mASyncRunner;
     private Bundle values;
     private TextView mOutput, mUsefulTip;
     private Button mViewPostButton, mDeletePostButton;
@@ -39,8 +35,6 @@ public class UpdateStatusResultDialog extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mFacebook = GlobalVars.facebook;
-        mASyncRunner = GlobalVars.aSyncRunner;
         mHandler = new Handler();
 
         setContentView(R.layout.update_post_response);
@@ -63,7 +57,7 @@ public class UpdateStatusResultDialog extends Dialog {
                 /*
                  * Source tag: view_post_tag
                  */
-                mASyncRunner.request(postId, new WallPostRequestListener());
+                Utility.mAsyncRunner.request(postId, new WallPostRequestListener());
             }
         });
         mDeletePostButton.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +65,7 @@ public class UpdateStatusResultDialog extends Dialog {
                 /*
                  * Source tag: delete_post_tag
                  */
-                mASyncRunner.request(postId, new Bundle(), "DELETE",
+                Utility.mAsyncRunner.request(postId, new Bundle(), "DELETE",
                         new WallPostDeleteListener(), null);
             }
         });
