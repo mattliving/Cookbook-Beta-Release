@@ -48,6 +48,7 @@ public final class R {
         public static final int my_recipes_icon=0x7f020013;
         public static final int searchicon=0x7f020014;
         public static final int settings_icon=0x7f020015;
+        public static final int twitter=0x7f020016;
     }
     public static final class id {
         public static final int AddIngredients=0x7f080012;
@@ -65,12 +66,13 @@ public final class R {
         public static final int ScrollView01=0x7f08002b;
         public static final int Season=0x7f080004;
         public static final int ShareToFacebook=0x7f080043;
+        public static final int ShareToTwitter=0x7f080044;
         public static final int UploadButton=0x7f080005;
         public static final int WeightMeasurement0=0x7f080011;
         public static final int apiOutput=0x7f08002c;
         public static final int apiOutputLabel=0x7f08002a;
         public static final int autoCompleteTextView1=0x7f080027;
-        public static final int bookmark=0x7f080044;
+        public static final int bookmark=0x7f080045;
         public static final int button1=0x7f080025;
         public static final int button2=0x7f08001c;
         public static final int button3=0x7f080020;
@@ -97,7 +99,7 @@ public final class R {
         public static final int new4=0x7f08003d;
         public static final int new5=0x7f080040;
         public static final int new6=0x7f080042;
-        public static final int ratingBar1=0x7f080045;
+        public static final int ratingBar1=0x7f080046;
         public static final int scrollView1=0x7f080007;
         public static final int spinner1=0x7f080024;
         public static final int tab1=0x7f080001;

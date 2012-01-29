@@ -93,7 +93,7 @@ public class ViewRecipeActivity extends Activity
         new6.setText(String.valueOf(count));
         
         Button shareFB = (Button) findViewById(R.id.ShareToFacebook);
-        //Button shareTwitter = (Button) findViewById(R.id.ShareToTwitter);
+        Button shareTwitter = (Button) findViewById(R.id.ShareToTwitter);
         CheckBox bookmark = (CheckBox) findViewById(R.id.bookmark);
         RatingBar rating = (RatingBar) findViewById(R.id.ratingBar1);
         
@@ -141,11 +141,16 @@ public class ViewRecipeActivity extends Activity
             }
         });
         
-        /*shareTwitter.setOnClickListener(new OnClickListener() {
+        shareTwitter.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-            	
+            	Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+            	sharingIntent.setType("text/plain");
+            	sharingIntent.setPackage("com.twitter.android");
+            	sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, "I'm cooking "+recipeName+" with #Cookbook Beta for #Android");
+            	sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject");
+            	startActivity(Intent.createChooser(sharingIntent,"Shared with"));
             }
-        });*/
+        });
         
         /** 
          * BOOKMARK BUTTON 
