@@ -3,8 +3,10 @@ package com.cookbook;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
@@ -108,7 +110,7 @@ public class AddRecipeActivity extends Activity {
                 		TableRow rowIngredient = new TableRow(AddRecipeActivity.this);
                 		EditText tIngredient = new EditText(AddRecipeActivity.this);
                 		tIngredient.setHint("Ingredient");
-                		tIngredient.setInputType(1);
+                		tIngredient.setInputType(InputType.TYPE_CLASS_TEXT);
                 		tIngredient.setId(counterIngredient);
                 		Button editButton = new Button(AddRecipeActivity.this);
                 		editButton.setVisibility(View.INVISIBLE);
@@ -124,7 +126,7 @@ public class AddRecipeActivity extends Activity {
                 		TableRow rowAmount = new TableRow(AddRecipeActivity.this);
                 		EditText tAmount = new EditText(AddRecipeActivity.this);
                 		tAmount.setHint("Amount (weight, volume etc.)");
-                		tAmount.setInputType(0);
+                		tAmount.setInputType(InputType.TYPE_CLASS_NUMBER);
                 		tAmount.setId(counterAmount);
                 		Button removeButton = new Button(AddRecipeActivity.this);
                 		removeButton.setVisibility(View.INVISIBLE);
@@ -341,6 +343,68 @@ public class AddRecipeActivity extends Activity {
         }
     }
     public void uploadInformation() {
-    	//upload shit!
+    	EditText RecipeName = (EditText)findViewById((int) getItemId(R.id.NameOfRecipe));
+    	Spinner MealType = (Spinner)findViewById((int) getItemId(R.id.RecipeType));
+    	EditText Hours = (EditText)findViewById((int) getItemId(R.id.Hours));
+    	EditText Minutes = (EditText)findViewById((int) getItemId(R.id.Minutes));
+    	EditText Season = (EditText)findViewById((int) getItemId(R.id.Season));
+    	EditText Method = (EditText)findViewById((int) getItemId(R.id.MethodBox));
+    	EditText Ingredient = null;
+        EditText Amount = null;
+        Spinner WeightMeasurement = null;
+        String recipeName = RecipeName.getText().toString();
+        String mealType = MealType.getSelectedItem().toString();
+        int hours = Integer.parseInt(Hours.getText().toString());
+        int minutes = Integer.parseInt(Minutes.getText().toString());
+        int duration = minutes + (hours*60);
+        String season = Season.getText().toString();
+        String method = Method.getText().toString();
+        String ingredient = null;
+        int amount = 0;
+        String weightMeasurement = null;
+        Cursor ingredientCursor = null;
+        int counter = 0;
+        long recipeID = 0;
+        long ingredientID = 0;
+    	/*
+        String MethodString = Method.getText().toString();
+        String NameString = Name.getText().toString();*/
+    	recipeID = mDbHelper.createRecipe(recipeName, method, mealType,
+    			duration, season, ""/*for region when added*/);
+    	for (int i = (int) getItemId(R.id.IngredientBox0); i <= counterIngredient; i+=25){
+    		Ingredient = (EditText)findViewById(i);
+    		Amount = (EditText)findViewById((int) getItemId(R.id.AmountBox0)+counter);
+    		WeightMeasurement = (Spinner)findViewById((int) getItemId(R.id.WeightMeasurement0)+counter);
+    		ingredient = Ingredient.getText().toString();
+    		amount = Integer.parseInt(Amount.getText().toString());
+    		weightMeasurement = WeightMeasurement.getSelectedItem().toString();
+    		//if(mDbHelper.fetchIngredient(ingredient) == null){
+    			ingredientID = mDbHelper.createIngredient(ingredient);
+    		//} else {
+    		//	ingredientCursor = mDbHelper.fetchIngredient(ingredient);
+    		//	ingredientID = ingredientCursor.getLong(0);
+    		//}
+    		if(weightMeasurement.equals("Ounce(s) (oz)")){
+    			amount = (int) Math.round(amount*28.35);
+    			weightMeasurement = "Grams(s) (g)";
+    		} else if (weightMeasurement.equals("Pound(s) (lb)")){
+    			amount = (int) Math.round(amount*0.4536);
+    			weightMeasurement = "Grams(s) (g)";
+    		} else if (weightMeasurement.equals("Pint(s)")){
+    			amount = (int) Math.round(amount*0.5683);
+    			weightMeasurement = "Litre(s) (l)";
+    		} else if (weightMeasurement.equals("Gallon(s)")){
+    			amount = (int) Math.round(amount*4.5461);
+    			weightMeasurement = "Litre(s) (l)";
+    		} else if (weightMeasurement.equals("Cup(s)")){
+    			amount = (int) Math.round(amount*240);
+    			weightMeasurement = "Millilitre(s) (ml)";
+    		}
+    		mDbHelper.createRecipeIngredient(recipeID, ingredientID, amount, weightMeasurement);
+    		counter += 25;
+    	}
+    	startActivity(getIntent());
+    	finish();
+    	//finish();
     }
 }

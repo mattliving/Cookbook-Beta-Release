@@ -30,6 +30,9 @@
         <item >Pinch</item>
         <item >Unit(s) (clove/lemon etc..)</item>
     </string-array>
+    <string name="CookingTime">Cooking Time</string>
+    <string name="Hours">Hours</string>
+    <string name="Minutes">Minutes</string>
     <string name="Measurement">Measurement</string>
     <string name="NoMoreIngredients">No more Ingredients</string>
     <string name="AddIngredient">Add Ingredient</string>

@@ -21,21 +21,100 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingTop="70dp" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/NameOfRecipe"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
     <EditText
         android:id="@+id/NameOfRecipe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/NameOfRecipe" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mealtype"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
     <Spinner
         android:id="@+id/RecipeType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/TypeOfRecipe" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Seasonal"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
     <EditText
         android:id="@+id/Season"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/Seasonal" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/CookingTime"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="2" >
+
+        <EditText
+            android:id="@+id/Hours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/Hours"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.52"
+            android:text="@string/Hours"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+	    
+	</LinearLayout>
+	<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="2" >
+
+        <EditText
+            android:id="@+id/Minutes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/Minutes"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/Minutes"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+	    
+	</LinearLayout>
+
     <Button
         android:id="@+id/UploadButton"
         android:layout_width="match_parent"
