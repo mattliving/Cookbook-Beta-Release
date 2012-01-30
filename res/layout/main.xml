@@ -11,7 +11,7 @@
 	    android:layout_centerHorizontal="true"
         android:gravity="center" />
 	<GridView
-	    android:id="@+id/gridview"
+	    android:id="@+id/main_gridview"
 	    android:background="#666666"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"

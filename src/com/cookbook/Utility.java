@@ -21,6 +21,7 @@ import android.net.Uri;
 import android.net.http.AndroidHttpClient;
 import android.provider.MediaStore;
 
+import com.cookbook.facebook.FriendsGetProfilePics;
 import com.facebook.android.AsyncFacebookRunner;
 import com.facebook.android.Facebook;
 

@@ -1,238 +1,300 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/tabHost"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/MainContent"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
-    <TabWidget
-    	android:layout_width="fill_parent"
-    	android:layout_height="wrap_content"
-    	android:id="@android:id/tabs" />
-    <FrameLayout
-        android:id="@android:id/tabcontent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/navbar"
+        style="@android:style/ButtonBar"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:weightSum="3" >
+
+        <ImageButton
+            android:id="@+id/homeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_menu_home" />
+
+        <ImageButton
+            android:id="@+id/searchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_search_category_default" />
+
+    </LinearLayout>
+
+    <TabHost
+        android:id="@+id/tabHost"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
-<!-- ///////////////////////////////////////////////// -->
-<!-- //////////////////TAB 1////////////////////////// -->
-<!-- ///////////////////////////////////////////////// -->
 
-<LinearLayout
-    android:id="@+id/tab1"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingTop="70dp" >
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/NameOfRecipe"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
 
-    <EditText
-        android:id="@+id/NameOfRecipe"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/NameOfRecipe" />
+            <!-- ///////////////////////////////////////////////// -->
+            <!-- //////////////////TAB 1////////////////////////// -->
+            <!-- ///////////////////////////////////////////////// -->
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/mealtype"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <Spinner
-        android:id="@+id/RecipeType"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/TypeOfRecipe" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Seasonal"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <EditText
-        android:id="@+id/Season"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/Seasonal" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/CookingTime"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <LinearLayout
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:weightSum="2" >
-
-        <EditText
-            android:id="@+id/Hours"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="@string/Hours"
-            android:inputType="number" />
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.52"
-            android:text="@string/Hours"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-	    
-	</LinearLayout>
-	<LinearLayout
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:weightSum="2" >
-
-        <EditText
-            android:id="@+id/Minutes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="@string/Minutes"
-            android:inputType="number" />
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/Minutes"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-	    
-	</LinearLayout>
-
-    <Button
-        android:id="@+id/UploadButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="listenerOfUploadButton"
-        android:text="@string/Upload" />
-</LinearLayout>
-     
-<!-- ///////////////////////////////////////////////// -->
-<!-- //////////////////TAB 2////////////////////////// -->
-<!-- ///////////////////////////////////////////////// -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-   	android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-   	android:orientation="vertical"
-   	android:paddingTop="70dp"
-   	android:id="@+id/tab2" >
-    <ScrollView
-        android:id="@+id/scrollView1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" >
-        <LinearLayout
-            android:id="@+id/linearLayout1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-            <TableLayout
-                android:id="@+id/IngredientsTable"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="vertical" >
-                <TableRow
-                    android:id="@+id/Ingredients1"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:baselineAligned="false" >
-                    <EditText
-                        android:id="@+id/IngredientBox0"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/Ingredient"
-                        android:inputType="text" />
-                    <Button
-                        android:id="@+id/EditButton0"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/Edit"
-                        android:visibility="invisible" />
-                </TableRow>
-                <TableRow
-                    android:id="@+id/Amount1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:baselineAligned="false" >
-                    <EditText
-                        android:id="@+id/AmountBox0"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/Amount"
-                        android:inputType="number"
-                        android:visibility="visible" />
-                    <Button
-                        android:id="@+id/RemoveButton0"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Remove"
-                        android:visibility="invisible" />
-                </TableRow>
-                <TableRow
-                    android:id="@+id/Measurement1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:baselineAligned="false" >
-                    <Spinner
-                        android:id="@+id/WeightMeasurement0"
-                        style="@android:style/Widget.Spinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:entries="@array/WeightMeasurement"
-                        android:prompt="@string/Measurement" />
-                </TableRow>
-            </TableLayout>
-            <Button
-                android:id="@+id/AddIngredients"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/tab1"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/AddIngredient" />
-        </LinearLayout>
-    </ScrollView>
-</LinearLayout>
-        
-<!-- ///////////////////////////////////////////////// -->
-<!-- //////////////////TAB 3////////////////////////// -->
-<!-- ///////////////////////////////////////////////// -->
-    <LinearLayout
-    	android:layout_width="fill_parent"
-    	android:layout_height="fill_parent"
-    	android:id="@+id/tab3"
-    	android:orientation="vertical"
-    	android:paddingTop="70dp" >
-        <EditText
-            android:id="@+id/MethodBox"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="top"
-            android:hint="@string/Method"
-            android:inputType="textMultiLine" >
-            <requestFocus />
-        </EditText>
-    </LinearLayout>
-</FrameLayout>
-</TabHost>
+                android:orientation="vertical"
+                android:paddingTop="70dp" >
 
-<!--LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                <ScrollView
+                    android:id="@+id/Tab1Scroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/textView1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/NameOfRecipe"
+                            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                        <EditText
+                            android:id="@+id/NameOfRecipe"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/NameOfRecipe" />
+
+                        <TextView
+                            android:id="@+id/textView3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/mealtype"
+                            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                        <Spinner
+                            android:id="@+id/RecipeType"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:entries="@array/TypeOfRecipe" />
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Seasonal"
+                            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                        <EditText
+                            android:id="@+id/Season"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/Seasonal" />
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/CookingTime"
+                            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="2" >
+
+                            <EditText
+                                android:id="@+id/Hours"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:hint="@string/Hours"
+                                android:inputType="number" />
+
+                            <TextView
+                                android:id="@+id/textView5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.52"
+                                android:text="@string/Hours"
+                                android:textAppearance="?android:attr/textAppearanceMedium" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="2" >
+
+                            <EditText
+                                android:id="@+id/Minutes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:hint="@string/Minutes"
+                                android:inputType="number" />
+
+                            <TextView
+                                android:id="@+id/textView6"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/Minutes"
+                                android:textAppearance="?android:attr/textAppearanceMedium" />
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/UploadButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:onClick="listenerOfUploadButton"
+                            android:text="@string/Upload" />
+                    </LinearLayout>
+                </ScrollView>
+            </LinearLayout>
+
+            <!-- ///////////////////////////////////////////////// -->
+            <!-- //////////////////TAB 2////////////////////////// -->
+            <!-- ///////////////////////////////////////////////// -->
+
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/tab2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="70dp" >
+
+                <ScrollView
+                    android:id="@+id/scrollView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" >
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" >
+
+                        <TableLayout
+                            android:id="@+id/IngredientsTable"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical" >
+
+                            <TableRow
+                                android:id="@+id/Ingredients1"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:baselineAligned="false" >
+
+                                <EditText
+                                    android:id="@+id/IngredientBox0"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/Ingredient"
+                                    android:inputType="text" />
+
+                                <Button
+                                    android:id="@+id/EditButton0"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/Edit"
+                                    android:visibility="invisible" />
+                            </TableRow>
+
+                            <TableRow
+                                android:id="@+id/Amount1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:baselineAligned="false" >
+
+                                <EditText
+                                    android:id="@+id/AmountBox0"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/Amount"
+                                    android:inputType="number"
+                                    android:visibility="visible" />
+
+                                <Button
+                                    android:id="@+id/RemoveButton0"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/Remove"
+                                    android:visibility="invisible" />
+                            </TableRow>
+
+                            <TableRow
+                                android:id="@+id/Measurement1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:baselineAligned="false" >
+
+                                <Spinner
+                                    android:id="@+id/WeightMeasurement0"
+                                    style="@android:style/Widget.Spinner"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:entries="@array/WeightMeasurement"
+                                    android:prompt="@string/Measurement" />
+                            </TableRow>
+                        </TableLayout>
+
+                        <Button
+                            android:id="@+id/AddIngredients"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/AddIngredient" />
+                    </LinearLayout>
+                </ScrollView>
+            </LinearLayout>
+
+            <!-- ///////////////////////////////////////////////// -->
+            <!-- //////////////////TAB 3////////////////////////// -->
+            <!-- ///////////////////////////////////////////////// -->
+
+            <LinearLayout
+                android:id="@+id/tab3"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:paddingTop="70dp" >
+
+                <EditText
+                    android:id="@+id/MethodBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="top"
+                    android:hint="@string/Method"
+                    android:inputType="textMultiLine" >
+
+                    <requestFocus />
+                </EditText>
+            </LinearLayout>
+        </FrameLayout>
+    </TabHost>
+
+</LinearLayout><!--
+LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical" >
@@ -254,4 +316,5 @@
         android:layout_height="wrap_content"
         android:text="@string/SubmitIngredients" />
 
-</LinearLayout-->
+</LinearLayout
+-->

@@ -4,6 +4,29 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
     
+    <LinearLayout
+        android:id="@+id/navbar"
+        style="@android:style/ButtonBar"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:weightSum="3" >
+
+        <ImageButton
+            android:id="@+id/homeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_menu_home" />
+
+        <ImageButton
+            android:id="@+id/searchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_search_category_default" />
+
+    </LinearLayout>
+    
     <TabWidget
     	android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
@@ -22,6 +45,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingTop="70dp" >
+            
             <LinearLayout
                 android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
@@ -46,8 +70,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" >
 
-                        <requestFocus />
-                    </ListView>
+                 		<requestFocus />
+                </ListView>
 
         </LinearLayout>
         

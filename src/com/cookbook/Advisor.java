@@ -2,15 +2,9 @@ package com.cookbook;
 
 
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-import android.widget.Toast;
 import android.database.Cursor;
 
-import com.cookbook.*;
-import com.cookbook.Recipe;
+import com.cookbook.adapter.CookbookDBAdapter;
 
 /**
  * This class implements methods for recipes suggestions

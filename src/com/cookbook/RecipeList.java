@@ -11,9 +11,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.util.Log;
 
-import com.cookbook.CookbookDBAdapter ;
-import com.cookbook.Recipe.Season;
-import com.cookbook.Recipe.TypeOfMeal;
+import com.cookbook.adapter.CookbookDBAdapter;
 
 
 /** 

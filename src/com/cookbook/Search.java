@@ -1,6 +1,6 @@
 package com.cookbook;
 
-import com.cookbook.CookbookDBAdapter;
+import com.cookbook.adapter.CookbookDBAdapter;
 
 public class Search {
 	CookbookDBAdapter mDbHelper;

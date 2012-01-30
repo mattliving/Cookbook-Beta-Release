@@ -15,14 +15,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Vector;
 
-import com.cookbook.Recipe.Season;
-import com.cookbook.Recipe.TypeOfMeal;
-
-import android.app.Activity;
-import android.content.Context;
-import android.widget.Toast;
-import android.content.*;
-
 /**
  * Parse a file from an input stream and generates a list of recipes.
  * Useful as an example on how to read files on android.
