@@ -68,17 +68,17 @@ public class FriendsList extends Activity implements OnItemClickListener {
             final long friendId = jsonArray.getJSONObject(position).getLong("uid");
             String name = jsonArray.getJSONObject(position).getString("name");
 
-            /*new AlertDialog.Builder(this).setTitle(R.string.post_on_wall_title)
+            new AlertDialog.Builder(this).setTitle(R.string.post_on_wall_title)
                     .setMessage(String.format(getString(R.string.post_on_wall), name))
                     .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             Bundle params = new Bundle();
-                            
+                            /*
                              * Source Tag: friend_wall_tag To write on a friend's wall, 
                              * provide friend's UID in the 'to' parameter.
                              * More info on feed dialog:
                              * https://developers.facebook.com/docs/reference/dialogs/feed/
-                             
+                             */
                             params.putString("to", String.valueOf(friendId));
                             params.putString("caption", getString(R.string.app_name));
                             params.putString("description", getString(R.string.app_desc));
@@ -88,7 +88,7 @@ public class FriendsList extends Activity implements OnItemClickListener {
                                     new PostDialogListener());
                         }
 
-                    }).setNegativeButton(R.string.no, null).show();*/
+                    }).setNegativeButton(R.string.no, null).show();
         } catch (JSONException e) {
             showToast("Error: " + e.getMessage());
         }
