@@ -18,7 +18,6 @@ import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.TableLayout;
 import android.widget.TableRow;
-import android.widget.Toast;
 
 import com.cookbook.facebook.BaseDialogListener;
 import com.cookbook.facebook.UpdateStatusResultDialog;
@@ -341,6 +340,24 @@ public class AddRecipeActivity extends Activity {
         	.show();
         }
     }
+    
+    public static String UppercaseFirstLetters(String str) 
+    {
+        boolean prevWasWhiteSp = true;
+        char[] chars = str.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            if (Character.isLetter(chars[i])) {
+                if (prevWasWhiteSp) {
+                    chars[i] = Character.toUpperCase(chars[i]);    
+                }
+                prevWasWhiteSp = false;
+            } else {
+                prevWasWhiteSp = Character.isWhitespace(chars[i]);
+            }
+        }
+        return new String(chars);
+    }
+    
     public void uploadInformation() {
     	EditText RecipeName = (EditText)findViewById((int) getItemId(R.id.NameOfRecipe));
     	Spinner MealType = (Spinner)findViewById((int) getItemId(R.id.RecipeType));
@@ -351,7 +368,7 @@ public class AddRecipeActivity extends Activity {
     	EditText Ingredient = null;
         EditText Amount = null;
         Spinner WeightMeasurement = null;
-        String recipeName = RecipeName.getText().toString();
+        String recipeName = UppercaseFirstLetters(RecipeName.getText().toString());
         String mealType = MealType.getSelectedItem().toString();
         int hours = Integer.parseInt(Hours.getText().toString());
         int minutes = Integer.parseInt(Minutes.getText().toString());
@@ -374,7 +391,7 @@ public class AddRecipeActivity extends Activity {
     		Ingredient = (EditText)findViewById(i);
     		Amount = (EditText)findViewById((int) getItemId(R.id.AmountBox0)+counter);
     		WeightMeasurement = (Spinner)findViewById((int) getItemId(R.id.WeightMeasurement0)+counter);
-    		ingredient = Ingredient.getText().toString();
+    		ingredient = UppercaseFirstLetters(Ingredient.getText().toString());
     		amount = Integer.parseInt(Amount.getText().toString());
     		weightMeasurement = WeightMeasurement.getSelectedItem().toString();
     		//if(mDbHelper.fetchIngredient(ingredient) == null){
@@ -404,6 +421,5 @@ public class AddRecipeActivity extends Activity {
     	}
     	startActivity(getIntent());
     	finish();
-    	//finish();
     }
 }

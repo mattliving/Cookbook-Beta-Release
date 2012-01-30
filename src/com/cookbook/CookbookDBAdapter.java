@@ -130,7 +130,7 @@ public class CookbookDBAdapter {
         mDbHelper.close();
     }
 
-    // create a new recipe using values provided in parameters
+// create a new recipe using values provided in parameters
     public long createRecipe(String recipeName, String method, String mealType,
     	int duration, String timeOfYear, String region) {
     	
@@ -141,7 +141,22 @@ public class CookbookDBAdapter {
     	addValues.put(KEY_DURATION, duration);
     	addValues.put(KEY_TIME_OF_YEAR, timeOfYear);
     	addValues.put(KEY_REGION, region);
-    	//addValues.put(KEY_RATING, region);
+
+        return mDb.insert(RECIPE_TABLE, null, addValues);
+    }
+	
+    // create a new recipe using values provided in parameters
+    public long createRecipe(String recipeName, String method, String mealType,
+    	int duration, String timeOfYear, String region, int rating) {
+    	
+    	ContentValues addValues = new ContentValues();
+    	addValues.put(KEY_RECIPE_NAME, recipeName);
+    	addValues.put(KEY_METHOD, method);
+    	addValues.put(KEY_MEAL_TYPE, mealType);
+    	addValues.put(KEY_DURATION, duration);
+    	addValues.put(KEY_TIME_OF_YEAR, timeOfYear);
+    	addValues.put(KEY_REGION, region);
+    	addValues.put(KEY_RATING, rating);
 
         return mDb.insert(RECIPE_TABLE, null, addValues);
     }
@@ -155,20 +170,31 @@ public class CookbookDBAdapter {
         	> 0;
     }
     
-    // return cursor over all recipes
+    // return cursor over all recipes, sorted by name
     public Cursor fetchAllRecipes() {
         return mDb.query(RECIPE_TABLE, new String[] {PKEY_RECIPE_ID,
         	KEY_RECIPE_NAME, KEY_METHOD, KEY_MEAL_TYPE, KEY_DURATION,
-        	KEY_TIME_OF_YEAR, KEY_REGION, KEY_RATING}, null, null, null, null, null);
+        	KEY_TIME_OF_YEAR, KEY_REGION, KEY_RATING}, null, null, null, null, 
+        	KEY_RECIPE_NAME);
     }
 
+    // return cursor over all recipes, sorted by category then name
+    public Cursor fetchAllRecipesByCategory() {
+    	String mealTypeOrder = " WHEN 'Breakfast' THEN 1 WHEN 'Lunch' THEN 2 WHEN 'Dinner' THEN 3 WHEN 'Snack' THEN 4 WHEN 'Dessert' THEN 5 ELSE 99 END";
+    	
+        return mDb.query(RECIPE_TABLE, new String[] {PKEY_RECIPE_ID,
+        	KEY_RECIPE_NAME, KEY_METHOD, KEY_MEAL_TYPE, KEY_DURATION,
+        	KEY_TIME_OF_YEAR, KEY_REGION, KEY_RATING}, null, null, null, null, 
+        	"CASE "+ KEY_MEAL_TYPE + mealTypeOrder + "," + KEY_RECIPE_NAME);
+    }
+    
     // return cursor at recipe with given recipeID 
     public Cursor fetchRecipe(long recipeId) throws SQLException {
 
-        Cursor mCursor = mDb.query(true, RECIPE_TABLE,
+        Cursor mCursor = mDb.query(RECIPE_TABLE,
         	new String[] {PKEY_RECIPE_ID, KEY_RECIPE_NAME, KEY_METHOD,
         	KEY_MEAL_TYPE, KEY_DURATION, KEY_TIME_OF_YEAR, KEY_REGION, KEY_RATING},
-        	PKEY_RECIPE_ID + "=" + recipeId, null, null, null, null, null);
+        	PKEY_RECIPE_ID + "=" + recipeId, null, null, null, KEY_RECIPE_NAME);
 
         if (mCursor != null) {
             mCursor.moveToFirst();
@@ -179,10 +205,11 @@ public class CookbookDBAdapter {
     // return cursor at recipe with given recipeName 
     public Cursor fetchRecipe(String recipeName) throws SQLException {
 
-        Cursor mCursor = mDb.query(false, RECIPE_TABLE,
+        Cursor mCursor = mDb.query(RECIPE_TABLE,
         	new String[] {PKEY_RECIPE_ID, KEY_RECIPE_NAME, KEY_METHOD,
         	KEY_MEAL_TYPE, KEY_DURATION, KEY_TIME_OF_YEAR, KEY_REGION, KEY_RATING},
-        	KEY_RECIPE_NAME + "=" + "'" +recipeName+ "'", null, null, null, null, null);
+        	KEY_RECIPE_NAME + "=" + "'" +recipeName+ "'", null, null, null,
+        	KEY_RECIPE_NAME);
 
         if (mCursor != null) {
             mCursor.moveToFirst();
@@ -199,17 +226,41 @@ public class CookbookDBAdapter {
      */
     public Cursor fetchRecipeLike(String recipeName) throws SQLException {
 
-    	Cursor mCursor = mDb.query(false, RECIPE_TABLE,
+    	Cursor mCursor = mDb.query(RECIPE_TABLE,
     		new String[] {PKEY_RECIPE_ID, KEY_RECIPE_NAME, KEY_METHOD,
     		KEY_MEAL_TYPE, KEY_DURATION, KEY_TIME_OF_YEAR, KEY_REGION, KEY_RATING},
-    		KEY_RECIPE_NAME + " LIKE " + "'"+recipeName+"'", null, null, null, null, null);
+    		KEY_RECIPE_NAME + " LIKE " + "'"+recipeName+"'", null, null, null, 
+    		KEY_RECIPE_NAME);
 
     	if (mCursor != null) {
     		mCursor.moveToFirst();
     	}
     	return mCursor;
     }
-   
+
+    /**
+     * Query used for suggestFromBookmarks
+     * @param type
+     * @param season
+     * @param cookingtime
+     * @return
+     * @throws SQLException
+     */
+    public Cursor fetchRecipe(String type,String season,int cookingtime) throws SQLException {
+ 
+        Cursor mCursor = mDb.query(RECIPE_TABLE,
+                new String[] {PKEY_RECIPE_ID, KEY_RECIPE_NAME, KEY_METHOD,
+                KEY_MEAL_TYPE, KEY_DURATION, KEY_TIME_OF_YEAR, KEY_REGION, KEY_RATING},
+                KEY_MEAL_TYPE + "=" + "'" +type+ "'"+" AND "+KEY_TIME_OF_YEAR+"="+"'"+season+"'"+
+                " AND "+KEY_DURATION+"<="+"'"+cookingtime+"'",
+                        null, null, null, null);
+ 
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+        }
+        return mCursor;
+    }
+
     // Update recipe at given recipe ID with the values passed
     public boolean updateRecipe(long recipeId, String recipeName, String method,
     	String mealType, int duration, String timeOfYear, String region) {
@@ -265,10 +316,10 @@ public class CookbookDBAdapter {
     // return cursor at recipe with given recipeID 
     public Cursor fetchRecipeIngredient(long recipeId) throws SQLException {
 
-        Cursor mCursor = mDb.query(true, RECIPE_INGREDIENTS_TABLE,
+        Cursor mCursor = mDb.query(RECIPE_INGREDIENTS_TABLE,
         	new String[] {PKEY_RECIPE_INGREDIENT_ID, FKEY_RECIPE_ID,
         	FKEY_INGREDIENT_ID, KEY_QUANTITY, KEY_UNIT}, FKEY_RECIPE_ID + "=" +
-        	recipeId, null, null, null, null, null);
+        	recipeId, null, null, null, null);
 
         if (mCursor != null) {
             mCursor.moveToFirst();
@@ -288,10 +339,10 @@ public class CookbookDBAdapter {
     // return cursor at ingredient with given ingredientID 
     public Cursor fetchIngredient(long ingredientId) throws SQLException {
 
-        Cursor mCursor = mDb.query(true, INGREDIENTS_TABLE,
+        Cursor mCursor = mDb.query(INGREDIENTS_TABLE,
         	new String[] {PKEY_INGREDIENT_ID, KEY_INGREDIENT},
         	PKEY_INGREDIENT_ID + "=" + ingredientId,
-        	null, null, null, null, null);
+        	null, null, null, null);
 
         if (mCursor != null) {
             mCursor.moveToFirst();

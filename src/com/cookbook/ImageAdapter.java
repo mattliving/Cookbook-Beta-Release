@@ -42,9 +42,9 @@ public class ImageAdapter extends BaseAdapter {
         return imageView;
     }
 
-    // references to our images
+    // References to our images
     private Integer[] mThumbIds = {
-            R.drawable.add_recipe_icon, R.drawable.my_recipes_icon,
-            R.drawable.friends_icon, R.drawable.settings_icon,
+    		R.drawable.my_recipes_icon, R.drawable.friends_icon,
+    		R.drawable.discover_recipes_icon, R.drawable.settings_icon,
     };
 }

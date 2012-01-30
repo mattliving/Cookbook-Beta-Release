@@ -131,6 +131,11 @@
         android:background="@drawable/facebook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/ShareToTwitter"
+        android:background="@drawable/twitter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <CheckBox
         android:id="@+id/bookmark"

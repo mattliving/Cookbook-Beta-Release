@@ -82,14 +82,14 @@ public class RecipeListActivity extends ListActivity {
     }
     
     private void createRecipe() {
-    	mDbHelper.createRecipe("Spaghetti Bolgnaise", "1. Step1\n2. Step2\n" +
+    	/*mDbHelper.createRecipe("Spaghetti Bolgnaise", "1. Step1\n2. Step2\n" +
     		"3. Step3\n4. Step4", "Dinner", 30, "", "Italy");
     	mDbHelper.createRecipe("Mousaka", "1. StepA\n2. StepB\n" +
         		"3. StepC\n4. StepD", "Lunch", 30, "", "Greek");
     	mDbHelper.createRecipe("Cheese on Toast", "1. Pre-heat grill\n2. Slice"
         		+ "cheese\n3. Cook one side of the toast\n4. Turn toast over\n" 
     			+ "5. Put cheese on uncooked side of toast\n6. Cook until" +
-    			" cheese" +	"is bubbling", "Snack", 10, "", "");
+    			" cheese" +	"is bubbling", "Snack", 10, "", "");*/
     }
 
     private void createRecipeIngredients() {

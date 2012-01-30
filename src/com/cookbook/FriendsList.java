@@ -55,8 +55,6 @@ public class FriendsList extends Activity implements OnItemClickListener {
         friendsList = (ListView) findViewById(R.id.friends_list);
         friendsList.setOnItemClickListener(this);
         friendsList.setAdapter(new FriendListAdapter(this));
-
-        //showToast(getString(R.string.can_post_on_wall));
     }
 
     /*
