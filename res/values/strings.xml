@@ -37,6 +37,7 @@
     <string name="NoMoreIngredients">No more Ingredients</string>
     <string name="AddIngredient">Add Ingredient</string>
     <string name="SubmitIngredients">Submit</string>
+    <string name="Ingredients">Ingredients:</string>
     <string name="Edit">Edit</string>
     <string name="Upload">Upload</string>
     <string name="shareFB">Share on Facebook</string>
@@ -83,6 +84,24 @@
         <item >Christmas</item>
         <item >Easter</item>
         <item >Halloween</item>
+    </string-array>
+    <string name="country_prompt">All</string>
+    <string-array name="Country">
+        <item>All</item>
+        <item >England</item>
+        <item>Scotland</item>
+        <item >Ireland</item>
+        <item >Italy</item>
+        <item >Spain</item>
+        <item>America</item>
+    </string-array>
+    <string-array name="CookingTime">
+        <item>All</item>
+        <item >10 mins</item>
+        <item>20 mins</item>
+        <item >30 mins</item>
+        <item >1 hour</item>
+        <item >2 hours</item>
     </string-array>
     <string name="Seasonal">Seasonal preference (optional)</string>
     <string name="Remove">Remove</string>

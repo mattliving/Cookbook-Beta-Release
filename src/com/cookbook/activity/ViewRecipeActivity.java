@@ -33,11 +33,11 @@ import com.facebook.android.FacebookError;
 public class ViewRecipeActivity extends Activity
 {
 	private CookbookDBAdapter mDbHelper;
-	
+
 	private Facebook mFacebook;
 	private Cursor recipe;
 	private Cursor ingredients;
-	
+
 	private long recipeID;
 	private String recipeName;
 	private String method;
@@ -46,12 +46,12 @@ public class ViewRecipeActivity extends Activity
 	private String timeOfYear;
 	private String region;
 	private float ratingVal;
-	
+
 	Resources myResources;
 	readFile rd;
 	/** List of Bookmarks */
 	protected RecipeList bookmarks = new RecipeList();
-	
+
 	public static final String HACK_ICON_URL = "http://www.facebookmobileweb.com/hackbook/img/facebook_icon_large.png";
 
     /** Called when the activity is first created. */
@@ -159,29 +159,29 @@ public class ViewRecipeActivity extends Activity
          * */
         bookmark.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
-			
+
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
-				
+
 				/**
 				 * if isChecked
 				 * 		add it to the bookmark list and save the list.
 				 * else
 				 * 		remove from the list(loaded from file) and save it
 				 */
-				
-				
+
+
 				if (isChecked)
 				{
 					bookmarks.addRecipe(new Recipe(recipeName,"",method,recipeID,mealType,
 							0,timeOfYear,region,0f));
-					
-					
+
+
 				}
 				else
 				{
 					bookmarks.removeRecipe(recipeName);
-					
+
 				}
 				FileOutputStream ros;
 				try {
@@ -191,7 +191,7 @@ public class ViewRecipeActivity extends Activity
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
+
 			}
         });
         
@@ -266,9 +266,5 @@ public class ViewRecipeActivity extends Activity
                     Toast.LENGTH_SHORT);
             toast.show();
         }
-    }
-    
-    
-   
-    
+    }   
 }

@@ -31,12 +31,11 @@ public class FilterActivity extends Activity {
 	protected ArrayAdapter<String> arrayadp;
 	
 	
-	 /*this is relating to the way the list items are displayed*/
-	   public final static String ITEM_TITLE = "title";  
-	   public final static String ITEM_CAPTION = "caption";  
-	
-		 String[] RECIPES = new String[]{" "};
-	   
+	/*this is relating to the way the list items are displayed*/
+	public final static String ITEM_TITLE = "title";  
+	public final static String ITEM_CAPTION = "caption";  
+
+	String[] RECIPES = new String[]{" "};
 	String Spinval1;
 	int cookingval;
 	String Spinval2;
@@ -54,8 +53,6 @@ public class FilterActivity extends Activity {
         return item;  
     }
 	
-	
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -64,7 +61,6 @@ public class FilterActivity extends Activity {
     list = new RecipeList();
     mDbHelper = new CookbookDBAdapter(this);
     mDbHelper.open();
-
 
         //This is the drop-down menu in the sorting/organization screen (tab 3)
         Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
@@ -100,7 +96,6 @@ public class FilterActivity extends Activity {
                 this, R.array.Ratings, android.R.layout.simple_spinner_item);
         adapter5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner5.setAdapter(adapter5);
-        
         
         Button submit = (Button) findViewById(R.id.button1);
         final Button cancel = (Button) findViewById(R.id.button2);   
@@ -180,46 +175,7 @@ public class FilterActivity extends Activity {
           		intent.putExtra("param4", Spinval4);
           		intent.putExtra("param5", ratingval);
             	startActivityForResult(intent, 0);
-            	
         	}
          });
-            /*	Bundle params = new Bundle();
-            	
-            	  List<Map<String,?>> filter = new LinkedList<Map<String,?>>(); 	
-            	
-          	  cursor = mDbHelper.fetchRecipeFilter(Spinval1,cookingval,Spinval3,Spinval4,ratingval);
-          	  
-          	  RECIPES = new String[cursor.getCount()];
-
-          	  if(cursor.getCount() > 0){
-          	  for(int i = 0; i< cursor.getCount(); i++){
-          		  RECIPES[i] = list.getRecipe(i).getName()+"\n"+list.getRecipe(i).getType();
-          	  	  filter.add(createItem(cursor.getString(1), cursor.getString(2))); 
-          	  	  cursor.moveToNext();
-          	  }
-          	  }
-          	  else
-          	  {
-            	  RECIPES = new String[1];
-            	  RECIPES[0] = "No Results";
-          	  	  filter.add(createItem("No results", "")); 
-          	  }
-          	  
-              // list_item is in /res/layout/ should be created
-             // arrayadp = new ArrayAdapter<String>(this, R.layout.list_item, RECIPES);
-          	 // setListAdapter(arrayadp);
-
-          	 // final ListView lv = getListView();
-          	 //lv.setTextFilterEnabled(true);
-
-                
-
-
-            }
-        });
-        
-        */   
-        
-
         }
 }
