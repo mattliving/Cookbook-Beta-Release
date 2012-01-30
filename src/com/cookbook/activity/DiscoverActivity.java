@@ -34,7 +34,7 @@ public class DiscoverActivity extends Activity {
 	                	startActivityForResult(intent, 1);
 	                	break;
 	            	case 2:
-	            		intent = new Intent(v.getContext(), SuggestionActivity.class);
+	            		intent = new Intent(v.getContext(), FilterActivity.class);
 	                	startActivityForResult(intent, 2);
 	                	break;
 	            	default:

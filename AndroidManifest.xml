@@ -27,6 +27,8 @@
      	<activity android:name=".activity.ViewRecipeActivity"></activity>
         <activity android:name=".activity.SettingsActivity"></activity>
      	<activity android:name=".activity.RecipeListActivity"></activity>
+     	<activity android:name=".activity.FilterActivity"></activity>
+     	<activity android:name=".activity.RecipeListFilterActivity"></activity>
         <activity android:name=".activity.UserRecipesActivity"></activity>
         <activity android:name=".activity.SearchActivity"></activity>
         <activity android:name=".activity.SuggestionActivity"></activity>

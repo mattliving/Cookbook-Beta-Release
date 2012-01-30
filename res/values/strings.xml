@@ -64,6 +64,26 @@
         <item>By Region</item>
         <item>By Rating</item>
     </string-array>
+    <string name="rating_menu_prompt">All</string>
+    <string-array name="Ratings">
+        <item>All</item>
+        <item >1 Star</item>
+        <item>2 Stars</item>
+        <item >3 Stars</item>
+        <item >4 Stars</item>
+        <item >5 Stars</item>
+    </string-array>
+    <string name="season_prompt">All</string>
+    <string-array name="TimeOfYear">
+        <item>All</item>
+        <item >Winter</item>
+        <item>Spring</item>
+        <item >Summer</item>
+        <item >Autumn</item>
+        <item >Christmas</item>
+        <item >Easter</item>
+        <item >Halloween</item>
+    </string-array>
     <string name="Seasonal">Seasonal preference (optional)</string>
     <string name="Remove">Remove</string>
     

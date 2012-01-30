@@ -11,8 +11,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.util.Log;
 
-import com.cookbook.adapter.CookbookDBAdapter;
-
+import com.cookbook.adapter.*;
 
 /** 
  * Class representing a list of Recipes classes
@@ -95,12 +94,7 @@ public class RecipeList {
 		return false;
 	}
 	
-	/**
-	 * TO-DO
-	 */
-	public void orderAlphabetical(){
-	
-	}
+
 	
 	public int size(){
 		return list.size();
@@ -142,6 +136,27 @@ public class RecipeList {
 	public void fetchAllRecipes(CookbookDBAdapter adpt){
 		
 		Cursor cursor = adpt.fetchAllRecipes();
+		
+		if (cursor == null) return;
+		/**
+		 * WHY 84 ROWS if the recipes insterted are 3?
+		 */
+		Log.d("MyDebug", String.valueOf(cursor.getCount()));
+		
+		cursor.moveToFirst();
+		while(!cursor.isAfterLast())
+		{
+			addRecipe(cursor);
+			
+		cursor.moveToNext();
+		}
+	
+		
+	}
+	
+	public void fetchfilterRecipes(CookbookDBAdapter adpt, String param1, int param2, String param3, String param4, float param5){
+		
+		Cursor cursor = adpt.fetchRecipeFilter(param1,param2,param3, param4,param5);
 		
 		if (cursor == null) return;
 		/**
