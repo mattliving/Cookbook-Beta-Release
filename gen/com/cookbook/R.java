@@ -9,10 +9,8 @@ package com.cookbook;
 
 public final class R {
     public static final class array {
-        public static final int CookingTime=0x7f070004;
-        public static final int Country=0x7f070005;
-        public static final int Ratings=0x7f070006;
-        public static final int TimeOfYear=0x7f070007;
+        public static final int Ratings=0x7f070004;
+        public static final int TimeOfYear=0x7f070005;
         public static final int TypeOfRecipe=0x7f070002;
         public static final int WeightMeasurement=0x7f070000;
         public static final int categories_array=0x7f070003;
@@ -195,8 +193,8 @@ public final class R {
         public static final int Minutes=0x7f060013;
         public static final int NameOfRecipe=0x7f06001d;
         public static final int NoMoreIngredients=0x7f060015;
-        public static final int Remove=0x7f060026;
-        public static final int Seasonal=0x7f060025;
+        public static final int Remove=0x7f060023;
+        public static final int Seasonal=0x7f060022;
         public static final int SubmitIngredients=0x7f060017;
         public static final int Upload=0x7f060019;
         public static final int api_response=0x7f060003;
@@ -205,28 +203,25 @@ public final class R {
         public static final int app_name=0x7f060000;
         public static final int categories_prompt=0x7f06001f;
         public static final int cookbookFBpage=0x7f060004;
-        public static final int country_prompt=0x7f060022;
         public static final int delete_post=0x7f060006;
-        public static final int duration=0x7f06002a;
-        public static final int duration_prompt=0x7f060021;
+        public static final int duration=0x7f060027;
         public static final int exception=0x7f060009;
         public static final int facebook_error=0x7f06000a;
-        public static final int hello123=0x7f060027;
-        public static final int mealtype=0x7f060029;
+        public static final int hello123=0x7f060024;
+        public static final int mealtype=0x7f060026;
         public static final int measurementSetting=0x7f06001e;
-        public static final int method=0x7f060028;
+        public static final int method=0x7f060025;
         public static final int no=0x7f06000e;
         public static final int post_on_wall=0x7f06000c;
         public static final int post_on_wall_title=0x7f06000b;
         public static final int post_tip=0x7f060008;
-        public static final int rating_menu_prompt=0x7f060023;
-        public static final int region=0x7f06002c;
-        public static final int season_prompt=0x7f060024;
+        public static final int rating_menu_prompt=0x7f060020;
+        public static final int region=0x7f060029;
+        public static final int season_prompt=0x7f060021;
         public static final int shareFB=0x7f06001a;
         public static final int shareTwitter=0x7f06001b;
-        public static final int timeofyear=0x7f06002b;
+        public static final int timeofyear=0x7f060028;
         public static final int tip_label=0x7f060007;
-        public static final int typeofmeal_prompt=0x7f060020;
         public static final int view_post=0x7f060005;
         public static final int yes=0x7f06000d;
     }
